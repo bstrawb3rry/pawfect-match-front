@@ -1,15 +1,19 @@
 .photo-gallery-container {
     position: relative;
-    margin: auto;
+    margin: 20px auto; // Centers the container and adds some margin
     text-align: center;
-    width: 700px;
+    width: 80%; // Makes the container width 80% of its parent
+    max-width: 700px; // Ensures it doesn't grow beyond 700px
     border-radius: 15px;
-    box-shadow: 0 8px 16px;
 }
 
 
 .photo-gallery-container img {
-    display: none;
+    display: block;
+    width: 100%; // Ensures the image scales to the container's width
+    height: auto; // Maintains the aspect ratio of the image
+    max-width: 30vw; // Makes the image width up to 70% of the viewport width
+    max-height: 40vh; // Makes the image height up to 50% of the viewport height
     border-radius: 15px;
 }
 

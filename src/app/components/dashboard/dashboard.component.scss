@@ -1,0 +1,33 @@
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; // Aligns items to the left
+    align-items: flex-start; // Aligns items at the top
+    gap: 10px; // Sets a small gap between items
+    margin-left: 300px;
+}
+
+.gallery-item {
+    flex: 1 1 300px; // Allows each item to grow but starts at 300px
+    width: 30%; // Each item will take up 30% of the container's width
+    height: 400px; // Sets a fixed height for uniformity
+    margin-right: 20px; // Adds space to the right of each item
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff; // Ensures a white background for consistency
+    margin-top: 100px;
+}
+
+.photo-gallery-container {
+    width: 100%; // Uses the full width of its parent .gallery-item
+    height: 100%; // Uses the full height of its parent .gallery-item
+}
+
+.photo-gallery-container img {
+    object-fit: cover; // Covers the container fully, cropping if necessary
+}

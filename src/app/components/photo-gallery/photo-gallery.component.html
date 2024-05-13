@@ -1,13 +1,14 @@
 <div *ngIf="imageIds && imageIds.length > 0" class="photo-gallery-container">
-    <!-- todo on image click -> matching process -->
-    <!-- todo to add pet name or details - I don't remember how it should look - should be in another component maybe and this one to handle only photo gallery -->
-    <img *ngFor="let image of imageIds; let i=index" [src]="currentImageSrc" [alt]="petName"
-        [ngCLass]="{'image-active': selectedIndex === i}" class="fade">
+    <img [src]="currentImageSrc" [alt]="petName" class="fade image-active">
 
     <div *ngIf="indicators" class="photo-gallery-dot-container">
-        <span *ngFor="let dot of imageIds; let i=index" class="dot" [ngCLass]="{'active': selectedIndex === i}"
+        <span *ngFor="let dot of imageIds; let i=index" class="dot" [ngClass]="{'active': selectedIndex === i}"
             (click)="selectImage(i)">
         </span>
+    </div>
+
+    <div>
+        <p style="margin-top: 20px;">{{petName}}</p>
     </div>
 
     <button *ngIf="controls" class="btn-photo-gallery btn-prev" (click)="onPrevClick()">
