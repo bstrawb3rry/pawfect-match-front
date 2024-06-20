@@ -7,12 +7,28 @@ import { CommonModule } from '@angular/common';
 import { PhotoGalleryComponent } from './components/photo-gallery/photo-gallery.component';
 import { PetService } from './services/pet.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MyMatchesComponent } from './components/my-matches/my-matches.component';
+import { MatchService } from './services/match.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PetDetailsDialogComponent } from './components/pet-details-dialog/pet-details-dialog.component';
+import { MyPetsComponent } from './components/my-pets/my-pets.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
+import { AuthService } from './services/auth.service';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { StorageService } from './services/storage.service';
+
+
+
 
 @NgModule({
   declarations: [
@@ -22,6 +38,12 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     HeaderComponent,
     LayoutComponent,
     SidebarComponent,
+    MyMatchesComponent,
+    PetDetailsDialogComponent,
+    MyPetsComponent,
+    SignupComponent,
+    LoginComponent,
+    AuthLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +51,15 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     CommonModule,
     HttpClientModule,
     MatToolbarModule,
+    MatSelectModule,
     BrowserAnimationsModule,
+    FormsModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
-  providers: [PetService],
+  providers: [PetService, MatchService, AuthService, StorageService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

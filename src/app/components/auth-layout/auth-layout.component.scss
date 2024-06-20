@@ -1,4 +1,21 @@
 .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .main {
+    width: 100%;
+  }
+
+  .header-container {
     position: fixed;
     top: 10px;
   
@@ -10,12 +27,11 @@
   
     grid-row: 1;
     grid-column: 2;
-    width: calc(100% - 300px);
+    width: 99%;
     z-index: 1;
-    left: 280px;
+    left: 6px;
     display: flex;
     flex-direction: row;
-
   }
   
   header {
@@ -25,21 +41,4 @@
   .title{
     font-family: WorkSans;
   }
-
-  .dropdown-container {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-left: 64%;
-  }
-
-  .dropdown-icon {
-    width: 70px;
-    height: 40px;
-    margin-right: 10px;
-  }
-
-  .dropdown-menu {
-    min-width: 150px;
-    color: black;
-  }
+  

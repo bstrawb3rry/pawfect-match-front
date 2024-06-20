@@ -1,24 +1,15 @@
+<!-- sidebar.component.html -->
 <div class="sidebar">
-    <div class="logo">
-      <img src="/assets/logo.png" alt="Logo">
-    </div>
-    <div class="navigation">
-      <ul>
-        <li>
-          <a routerLink="/home">Home</a>
-        </li>
-        <li>
-          <a routerLink="/my-pets">My Pets</a>
-        </li>
-        <li>
-            <a routerLink="/my-matches">My Matches</a>
-        </li>
-        <li>
-            <a routerLink="/my-dms">My DMs</a>
-        </li>
-        <li>
-            <button class="logout-btn">Logout</button>
-        </li>
-      </ul>
-    </div>
+  <div class="logo">
+    <img src="assets/logo.png" alt="Logo">
   </div>
+  <div class="navigation">
+    <ul>
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/my-pets" routerLinkActive="active">My Pets</a></li>
+      <li><a routerLink="/my-matches" routerLinkActive="active">My Matches</a></li>
+      <li><a routerLink="/my-dms">My DMs</a></li>
+      <li><button class="logout-btn">Logout</button></li>
+    </ul>
+  </div>
+</div>

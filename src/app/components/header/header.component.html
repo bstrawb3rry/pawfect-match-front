@@ -1,8 +1,16 @@
+<!-- header.component.html -->
 <div class="container">
-    <mat-toolbar color="primary">
-       <span class="title">PAWFECT MATCH</span>
-       <span class="spacer"></span>
-       
-     </mat-toolbar>
-  
-  </div>
+  <mat-toolbar color="primary">
+    <span class="title">PAWFECT MATCH</span>
+    <span class="spacer"></span>
+    <!-- Dropdown with image -->
+    <div class="dropdown-container" *ngIf="myPets.length > 0">
+      <img src="assets/switcher.png" alt="Dropdown Icon" class="dropdown-icon">
+      <mat-select [(value)]="selectedValue" class="dropdown-menu" (selectionChange)="onSelectionChange($event)">
+        <mat-option *ngFor="let option of myPets" [value]="option">
+          {{ option.name }}
+        </mat-option>
+      </mat-select>
+    </div>
+  </mat-toolbar>
+</div>

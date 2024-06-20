@@ -1,5 +1,30 @@
-<div class="gallery-container">
-    <div *ngFor="let pet of possibleMatches" class="gallery-item">
-        <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name"></app-photo-gallery>
-    </div>
+<div class="filter-container" *ngIf="possibleMatches.length > 0;">
+  <label for="age">Age:</label>
+  <input type="range" id="age" [(ngModel)]="filters.age" name="age" min="0" max="20">
+  <output>{{ filters.age }} years</output>
+  <!-- <select id="color" formControlName="color" class="form-control">
+    <option *ngFor ="let color of colors">{{color}} </option>
+  </select> -->
+  <button class="apply-filters-button" (click)="applyFilters()">Apply Filters</button>
+  <button class="cancel-filters-button" (click)="cancelFilters()">X</button>
 </div>
+
+<div class="gallery-container" *ngIf="possibleMatches.length > 0; else noMatchesTemplate" >
+  <div *ngFor="let pet of possibleMatches" class="gallery-item">
+    <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name"></app-photo-gallery>
+    <div class="like-button-container">
+      <button class="like-button" (click)="likePet(pet.id)">
+        <img src="assets/paw.png" alt="Like">
+      </button>
+    </div>
+    <div class="details-button-container">
+      <button class="details-button" (click)="displayPetDetails(pet)">Details</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noMatchesTemplate>
+  <div class="no-matches-message" *ng>
+    You don't have any matches yet...
+  </div>
+</ng-template>

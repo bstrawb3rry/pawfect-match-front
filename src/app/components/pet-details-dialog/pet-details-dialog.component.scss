@@ -1,0 +1,40 @@
+.mat-dialog-container {
+    .dialog-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+  
+      img {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+      }
+  
+      .details {
+        width: 100%;
+        text-align: left;
+  
+        h5 {
+          margin-bottom: 10px;
+          font-size: 1.5em;
+          text-align: center;
+        }
+  
+        p {
+          margin: 5px 0;
+          font-size: 1em;
+        }
+  
+        ul {
+          padding-left: 20px;
+        }
+      }
+    }
+  
+    .mat-dialog-actions {
+      justify-content: center;
+    }
+  }
+  
