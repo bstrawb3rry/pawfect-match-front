@@ -1,40 +1,47 @@
-.mat-dialog-container {
-    .dialog-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-  
-      img {
-        width: 100%;
-        max-width: 300px;
-        border-radius: 15px;
-        margin-bottom: 20px;
-      }
-  
-      .details {
-        width: 100%;
-        text-align: left;
-  
-        h5 {
-          margin-bottom: 10px;
-          font-size: 1.5em;
-          text-align: center;
-        }
-  
-        p {
-          margin: 5px 0;
-          font-size: 1em;
-        }
-  
-        ul {
-          padding-left: 20px;
-        }
-      }
-    }
-  
-    .mat-dialog-actions {
-      justify-content: center;
+:host ::ng-deep app-photo-gallery {
+  .photo-gallery-container {
+    position: relative;
+    margin: 10px auto;
+    text-align: center;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 200px; /* Adjust this to make the images smaller */
+      max-height: 200px; /* Adjust this to make the images smaller */
+      border-radius: 15px;
     }
   }
-  
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: row; /* Change to row to place items side by side */
+  justify-content: space-between; /* Add some spacing between elements */
+  padding: 20px;
+
+  .details {
+    width: 50%; /* Adjust the width to fit content side by side */
+    text-align: left;
+
+    h5 {
+      margin-bottom: 10px;
+      font-size: 1.5em;
+      text-align: center;
+    }
+
+    p {
+      margin: 5px 0;
+      font-size: 1em;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+  }
+}
+
+.mat-dialog-actions {
+  justify-content: center;
+}

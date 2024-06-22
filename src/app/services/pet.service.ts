@@ -16,18 +16,7 @@ export enum OrderDirection {
 
     path = '/api/pets';
 
-    // getPetsForPossibleMatching(id: number, ownerId: number): Observable<Pet[] | null> {
-    //   return this.http.get(this.path+ `/${id}/owner/${ownerId}`)
-    //     .pipe(
-    //       map((response: unknown) => {
-    //         const petList = (response as Pet[]);
-    //         if (petList) {
-    //             return petList;
-    //         }
-    //         return [];
-    //       })
-    //     );
-    // }
+   
        getPetsForPossibleMatching(id: number, ownerId: number, age?: number): Observable<Pet[] | null> {
       let params = new HttpParams();
       if (age !== undefined) params = params.set('age', age.toString());
@@ -105,5 +94,21 @@ export enum OrderDirection {
 
     getPetImageUrl(photoId: number){
       return this.path + `/photo/${photoId}`
+    }
+
+    addPet(ownerId: number, petDto: Pet): Observable<Pet> {
+      return this.http.post<Pet>(`${this.path}/owner/${ownerId}`, petDto);
+    }
+
+    // addPhoto(petId: number, image: File): Observable<number> {
+    //   const uploadedData = new FormData();
+    //   uploadedData.append('image', image);
+    //   return this.http.post<number>(`${this.path}/photo/${petId}`, uploadedData);
+    // }
+
+     addPhoto(petId: number, image: File): Observable<number> {
+      const uploadedData = new FormData();
+      uploadedData.append('image', image);
+      return this.http.post<number>(`${this.path}/photo/${petId}`, uploadedData);
     }
   }

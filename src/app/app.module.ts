@@ -11,7 +11,10 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MyMatchesComponent } from './components/my-matches/my-matches.component';
@@ -26,6 +29,10 @@ import { AuthLayoutComponent } from './components/auth-layout/auth-layout.compon
 import { AuthService } from './services/auth.service';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { StorageService } from './services/storage.service';
+import { AddPetDialogComponent } from './components/add-pet-dialog/add-pet-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChatService } from './services/chat.service';
 
 
 
@@ -43,7 +50,9 @@ import { StorageService } from './services/storage.service';
     MyPetsComponent,
     SignupComponent,
     LoginComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    AddPetDialogComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +64,13 @@ import { StorageService } from './services/storage.service';
     BrowserAnimationsModule,
     FormsModule,
     MatDialogModule,
-    ReactiveFormsModule
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatFormFieldModule
   ],
-  providers: [PetService, MatchService, AuthService, StorageService,
+  providers: [PetService, MatchService, AuthService, StorageService, ChatService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

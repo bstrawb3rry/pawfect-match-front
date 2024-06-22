@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
     children: [
       { path: 'home', component: DashboardComponent },
       { path: 'my-matches', component: MyMatchesComponent },
-      { path: 'my-pets', component: MyPetsComponent }
+      { path: 'my-pets', component: MyPetsComponent },
+      { path: 'my-dms', component: ChatComponent }
     ]
   },
   { path: '**', redirectTo: 'login' }  // Wildcard route to redirect to login

@@ -23,8 +23,6 @@ export class DashboardComponent implements OnInit {
   selectedPetId: number;
   selectedPetType: string;
 
-  colors: string[] = [];
-
 
   constructor(
     private petService: PetService,
@@ -42,7 +40,6 @@ export class DashboardComponent implements OnInit {
     this.selectedPetId = +localStorage.getItem('selectedPetId');
     this.selectedPetType = localStorage.getItem('selectedPetType');
     this.loadMatches();
-    this.loadColors();
 
   }
 
@@ -52,15 +49,6 @@ export class DashboardComponent implements OnInit {
         if (possibleMatches) {
           this.possibleMatches = possibleMatches;
           this.changeDetectorRef.detectChanges();
-        }
-      });
-  }
-
-  loadColors(): void {
-    this.petService.getColorsByType(this.selectedPetType)
-      .subscribe((colors: string[] | null) => {
-        if (colors) {
-          this.colors = colors;
         }
       });
   }

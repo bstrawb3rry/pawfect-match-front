@@ -2,13 +2,14 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../models/user.model";
 import { Observable, map } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   path = '/api/auth';
 
@@ -25,5 +26,10 @@ export class AuthService {
         return response;
       })
     );
+  }
+
+  logout(): void {
+    localStorage.removeItem('jwt'); // Remove the JWT token from local storage
+    this.router.navigate(['/login']); // Redirect to login page
   }
 }

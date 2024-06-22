@@ -2,9 +2,6 @@
   <label for="age">Age:</label>
   <input type="range" id="age" [(ngModel)]="filters.age" name="age" min="0" max="20">
   <output>{{ filters.age }} years</output>
-  <!-- <select id="color" formControlName="color" class="form-control">
-    <option *ngFor ="let color of colors">{{color}} </option>
-  </select> -->
   <button class="apply-filters-button" (click)="applyFilters()">Apply Filters</button>
   <button class="cancel-filters-button" (click)="cancelFilters()">X</button>
 </div>

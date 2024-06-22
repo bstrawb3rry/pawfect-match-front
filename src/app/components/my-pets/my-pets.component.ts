@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Pet } from 'src/app/models/pet.model';
 import { PetService } from 'src/app/services/pet.service';
 import { PetDetailsDialogComponent } from '../pet-details-dialog/pet-details-dialog.component';
+import { AddPetDialogComponent } from '../add-pet-dialog/add-pet-dialog.component';
 
 @Component({
   selector: 'app-my-pets',
@@ -12,17 +13,16 @@ import { PetDetailsDialogComponent } from '../pet-details-dialog/pet-details-dia
 export class MyPetsComponent implements OnInit {
   
   myPets: Pet[] = [];
-  breeds: string[] = []; //to remove
   ownerId: number;
 
   constructor(private petService: PetService,
+    private changeDetectorRef: ChangeDetectorRef,
     public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.ownerId = +localStorage.getItem('ownerId');
     this.loadMyPets();
-    this.loadBreeds(); //to remove
   }
 
   loadMyPets(): void {
@@ -30,15 +30,6 @@ export class MyPetsComponent implements OnInit {
       .subscribe((pets: Pet[] | null) => {
         if (pets) {
           this.myPets = pets;
-        }
-      });
-  }
-
-  loadBreeds(): void {
-    this.petService.getBreedsByType('Dog') // Hardcoded type dog --- to remove
-      .subscribe((breeds: string[] | null) => {
-        if (breeds) {
-          this.breeds = breeds;
         }
       });
   }
@@ -51,6 +42,17 @@ export class MyPetsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+    });
+  }
+
+  openAddPetDialog(): void {
+    const dialogRef = this.dialog.open(AddPetDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.componentInstance.petAdded.subscribe(() => {
+      this.loadMyPets();
+      this.changeDetectorRef.detectChanges();
     });
   }
 }

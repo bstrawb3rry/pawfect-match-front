@@ -32,3 +32,14 @@
 .photo-gallery-container img {
     object-fit: cover; // Covers the container fully, cropping if necessary
 }
+
+.add-pet-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 50px;
+}
+
+.add-pet-button {
+  position: relative;
+  z-index: 1;
+}

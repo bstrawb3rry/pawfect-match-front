@@ -1,6 +1,6 @@
-<!-- <select id="breed" formControlName="breed" class="form-control">
-  <option *ngFor ="let breed of breeds">{{breed}} </option>
-</select> -->
+<div class="add-pet-button-container">
+  <button mat-raised-button color="primary" (click)="openAddPetDialog()">Add Pet</button>
+</div>
 <div class="gallery-container">
     <div *ngFor="let pet of myPets" class="gallery-item">
       <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name"></app-photo-gallery>
