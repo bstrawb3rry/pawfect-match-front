@@ -11,17 +11,21 @@ import { HttpClient } from '@angular/common/http';
 export class ChatMessageService {
   private stompClient: Client;
   private messageSubject: Subject<string> = new Subject<string>();
+  private token = localStorage.getItem('jwt');
 
   constructor(private http: HttpClient) {
     this.stompClient = new Client({
       brokerURL: 'ws://localhost:8080/ws',
-      connectHeaders: {},
+      connectHeaders: {
+        Authorization: `Bearer ${this.token}`
+      },
       debug: (str) => { console.log(str); },
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
       webSocketFactory: () => new SockJS('http://localhost:8080/ws')
     });
+    
 
     this.stompClient.onConnect = (frame) => {
       this.stompClient.subscribe('/topic/messages', (message: Message) => {

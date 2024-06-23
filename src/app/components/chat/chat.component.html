@@ -8,8 +8,8 @@
   <div class="chat-room">
     <h3>Chat Room</h3>
     <div class="messages">
-      <div *ngFor="let message of messages">
-        <span>{{ message }}</span>
+      <div *ngFor="let message of messages" [ngClass]="{'sent': message.senderId === ownerId, 'received': message.senderId !== ownerId}">
+        <span>{{ message.content }}</span>
       </div>
     </div>
     <div class="input">

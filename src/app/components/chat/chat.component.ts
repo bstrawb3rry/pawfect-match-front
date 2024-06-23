@@ -9,7 +9,7 @@ import { ChatMessageService } from 'src/app/services/chat-message.service';
 })
 export class ChatComponent implements OnInit {
   chats: ChatMessage[] = [];
-  messages: string[] =[];
+  messages: ChatMessage[] = [];
   newMessage = '';
   chatName = '';
   ownerId: number;
@@ -19,7 +19,15 @@ export class ChatComponent implements OnInit {
   constructor(
     private chatMessageService: ChatMessageService) 
     {
-      this.messages.push("Say hello to your furry friend's owner!");
+      this.messages.push(new ChatMessage({
+        id: -1,
+        senderId: -1,
+        senderName: null, 
+        receiverId: -1,
+        receiverName: null,
+        content: "Say hello to your furry friend's owner!",
+        timestamp: null
+      }));
     }
 
   ngOnInit(): void {
@@ -41,18 +49,23 @@ export class ChatComponent implements OnInit {
   } 
 
   getReceiverId(chat: ChatMessage) {
-    return chat.senderId == this.ownerId ? chat.receiverId : chat.senderId;
+    console.log("chat: ", chat);
+    var test = chat.senderId == this.ownerId ? chat.receiverId : chat.senderId;
+    console.log("test see receiver id: ", test);
+    return test;
+    // return chat.senderId == this.ownerId ? chat.receiverId : chat.senderId;
   } 
 
   selectChat(chat: ChatMessage): void {
+    console.log("into selectChat: ", chat);
     this.selectedChatId = chat.id;
     this.selectedReceiverId = this.getReceiverId(chat);
     this.loadMessages();
   }
 
   loadMessages(): void {
-    this.chatMessageService.getMessages(this.ownerId, this.selectedReceiverId).subscribe((chats: ChatMessage[]) => {
-      this.messages = chats.map(m => m.content);
+    this.chatMessageService.getMessages(this.ownerId, this.selectedReceiverId).subscribe((messages: ChatMessage[]) => {
+      this.messages = messages;
     });
   }
 
@@ -69,7 +82,7 @@ export class ChatComponent implements OnInit {
       });
 
       this.chatMessageService.sendMessage(message).subscribe(() => {
-        this.messages.push(message.content);
+        this.messages.push(message);
         this.newMessage = '';
       });
     }

@@ -1,75 +1,74 @@
-
 .chat-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
-  margin-top: 70px;
-  margin-left: 150px;
+  width: 90%;
+  margin-left: 120px;
+}
 
-  .chat-list {
-    width: 20%;
-    background: #f1f1f1;
-    padding: 10px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+.chat-list {
+  flex: 1;
+  max-width: 300px;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
 
-    h3 {
-      margin-top: 0;
-    }
+.chat-room {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
 
-    ul {
-      list-style-type: none;
-      padding: 0;
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
 
-      li {
-        padding: 10px;
-        cursor: pointer;
-        border-bottom: 1px solid #ddd;
+.messages .sent {
+  display: flex;
+  justify-content: flex-end;
+}
 
-        &:hover {
-          background: #ddd;
-        }
-      }
-    }
-  }
+.messages .received {
+  display: flex;
+  justify-content: flex-start;
+}
 
-  .chat-room {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.messages .sent span, .messages .received span {
+  max-width: 70%;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
 
-    h3 {
-      background: #3f51b5;
-      color: #fff;
-      margin: 0;
-      padding: 10px;
-    }
+.messages .sent span {
+  background-color: #d4edda;
+}
 
-    .messages {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-    }
+.messages .received span {
+  background-color: #f8d7da;
+}
 
-    .input {
-      display: flex;
-      padding: 10px;
-      background: #f1f1f1;
+.input {
+  display: flex;
+  align-items: center;
+}
 
-      input {
-        flex: 1;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-      }
+.input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
 
-      button {
-        background: #3f51b5;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        margin-left: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-    }
-  }
+.input button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
 }
