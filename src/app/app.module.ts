@@ -13,7 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -32,7 +33,7 @@ import { StorageService } from './services/storage.service';
 import { AddPetDialogComponent } from './components/add-pet-dialog/add-pet-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChatComponent } from './components/chat/chat.component';
-import { ChatService } from './services/chat.service';
+import { ChatMessageService } from './services/chat-message.service';
 
 
 
@@ -66,11 +67,12 @@ import { ChatService } from './services/chat.service';
     MatDialogModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule
   ],
-  providers: [PetService, MatchService, AuthService, StorageService, ChatService,
+  providers: [PetService, MatchService, AuthService, StorageService, ChatMessageService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

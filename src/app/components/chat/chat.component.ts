@@ -1,37 +1,77 @@
-// src/app/components/chat/chat.component.ts
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ChatService } from '../../services/chat.service';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ChatMessage } from 'src/app/models/chat-message.model';
+import { ChatMessageService } from 'src/app/services/chat-message.service';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, OnDestroy {
-  message: string = '';
-  messages: string[] = [];
-  private chatSubscription: Subscription;
+export class ChatComponent implements OnInit {
+  chats: ChatMessage[] = [];
+  messages: string[] =[];
+  newMessage = '';
+  chatName = '';
+  ownerId: number;
+  selectedChatId: number | null = null;
+  selectedReceiverId: number | null = null;
 
-  constructor(private chatService: ChatService) {}
+  constructor(
+    private chatMessageService: ChatMessageService) 
+    {
+      this.messages.push("Say hello to your furry friend's owner!");
+    }
 
-  ngOnInit() {
-    this.chatSubscription = this.chatService.getMessages().subscribe((message: string) => {
-      this.messages.push(message);
+  ngOnInit(): void {
+    this.ownerId = +localStorage.getItem('ownerId');
+    this.loadChats();
+  }
+
+  loadChats(): void {
+    this.chatMessageService.getUserChats(this.ownerId).subscribe(chats => {
+      this.chats = chats;
+      if (chats.length > 0) {
+        this.selectChat(chats[0]);
+      }
     });
   }
 
-  sendMessage() {
-    if (this.message.trim()) {
-      this.chatService.sendMessage(this.message);
-      this.message = '';
-    }
+  getChatName(chat: ChatMessage) {
+    return chat.senderId == this.ownerId ? chat.receiverName : chat.senderName;
+  } 
+
+  getReceiverId(chat: ChatMessage) {
+    return chat.senderId == this.ownerId ? chat.receiverId : chat.senderId;
+  } 
+
+  selectChat(chat: ChatMessage): void {
+    this.selectedChatId = chat.id;
+    this.selectedReceiverId = this.getReceiverId(chat);
+    this.loadMessages();
   }
 
-  ngOnDestroy() {
-    if (this.chatSubscription) {
-      this.chatSubscription.unsubscribe();
+  loadMessages(): void {
+    this.chatMessageService.getMessages(this.ownerId, this.selectedReceiverId).subscribe((chats: ChatMessage[]) => {
+      this.messages = chats.map(m => m.content);
+    });
+  }
+
+  sendMessage(): void {
+    if (this.newMessage) {
+      const message = new ChatMessage({
+        id: -1,
+        senderId: this.ownerId,
+        senderName: null, 
+        receiverId: this.selectedReceiverId,
+        receiverName: null,
+        content: this.newMessage,
+        timestamp: null
+      });
+
+      this.chatMessageService.sendMessage(message).subscribe(() => {
+        this.messages.push(message.content);
+        this.newMessage = '';
+      });
     }
-    this.chatService.disconnect();
   }
 }

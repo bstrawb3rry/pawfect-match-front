@@ -1,24 +1,75 @@
 
 .chat-container {
+  display: flex;
+  height: 100vh;
+  margin-top: 70px;
+  margin-left: 150px;
+
+  .chat-list {
+    width: 20%;
+    background: #f1f1f1;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+    h3 {
+      margin-top: 0;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        padding: 10px;
+        cursor: pointer;
+        border-bottom: 1px solid #ddd;
+
+        &:hover {
+          background: #ddd;
+        }
+      }
+    }
+  }
+
+  .chat-room {
+    flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
+
+    h3 {
+      background: #3f51b5;
+      color: #fff;
+      margin: 0;
+      padding: 10px;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .input {
+      display: flex;
+      padding: 10px;
+      background: #f1f1f1;
+
+      input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      button {
+        background: #3f51b5;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin-left: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
   }
-  
-  mat-card {
-    width: 400px;
-  }
-  
-  .messages {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-  
-  .message {
-    padding: 8px;
-    margin: 4px 0;
-    background-color: #f1f1f1;
-    border-radius: 4px;
-  }
-  
+}
