@@ -1,7 +1,9 @@
 <div class="chat-container">
   <div class="chat-list">
     <h3>My DMs
-      <button (click)="addNewChat()">Add New Chat</button>
+      <button class="add-new-chat-button" mat-icon-button (click)="addNewChat()">
+        <mat-icon>add</mat-icon>
+      </button>
     </h3>
     <ul>
       <li *ngFor="let chat of chats" (click)="selectChat(chat)">{{ getChatName(chat) }}</li>

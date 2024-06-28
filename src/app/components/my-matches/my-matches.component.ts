@@ -18,6 +18,7 @@ export class MyMatchesComponent implements OnInit {
     age: 1 // Default age filter value
   };
   selectedPetId: number = -1;
+  hasPets: boolean = false;
 
   constructor(private petService: PetService,
     public dialog: MatDialog,
@@ -46,6 +47,7 @@ export class MyMatchesComponent implements OnInit {
 
   loadFullMatches(): void {
     console.log('load full match: ', this.selectedPetId);
+    this.hasPets = this.selectedPetId ? true : false;
     this.petService.getPetsMatches(this.selectedPetId)
       .subscribe((matches: Pet[] | null) => {
         if (matches) {

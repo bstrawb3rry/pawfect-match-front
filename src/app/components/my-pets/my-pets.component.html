@@ -1,7 +1,7 @@
 <div class="add-pet-button-container">
   <button mat-raised-button color="primary" (click)="openAddPetDialog()">Add Pet</button>
 </div>
-<div class="gallery-container">
+<div class="gallery-container" *ngIf="myPets.length > 0; else noPetsTemplate">
     <div *ngFor="let pet of myPets" class="gallery-item">
       <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name"></app-photo-gallery>
       <div class="details-button-container">
@@ -9,3 +9,9 @@
       </div>
     </div>
 </div>
+
+<ng-template #noPetsTemplate>
+  <div class="no-pets-message">
+    You don't have any pets. Add your furry friend now and begin your search for their Pawfect Match!
+  </div>
+</ng-template>

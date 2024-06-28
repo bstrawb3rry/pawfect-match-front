@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   };
   ownerId: number;
   selectedPetId: number = -1;
+  hasPets: boolean = false;
 
 
   constructor(
@@ -60,6 +61,7 @@ export class DashboardComponent implements OnInit {
   }
 
   loadMatches() {
+    this.hasPets = this.selectedPetId ? true : false;
     this.petService.getPetsForPossibleMatching(this.selectedPetId, this.ownerId)
       .subscribe(possibleMatches => {
         if (possibleMatches) {

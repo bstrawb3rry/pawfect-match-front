@@ -20,8 +20,14 @@
   </div>
 </div>
 
+<ng-template #noPetsTemplate>
+  <div class="no-pets-message">
+    You don't have any pets. <br><a (click)="redirectToMyPets()">Add your furry friend now</a> and begin your search for their Pawfect Match!
+  </div>
+</ng-template>
+
 <ng-template #noMatchesTemplate>
-  <div class="no-matches-message" *ng>
-    You don't have any matches yet...
+  <div class="no-matches-message" *ngIf="hasPets; else noPetsTemplate" >
+    No matching furry friends yet.. <br> Come back a bit later to find your Pawfect Match!
   </div>
 </ng-template>
