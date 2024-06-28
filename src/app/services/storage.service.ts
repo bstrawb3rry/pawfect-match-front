@@ -7,13 +7,17 @@ import { BehaviorSubject } from 'rxjs';
 export class StorageService {
   private storageSubject = new BehaviorSubject(null);
 
-  watchStorage(): BehaviorSubject<any> {
-    return this.storageSubject;
+  watchStorage(){
+    return this.storageSubject.asObservable();
   }
 
   setItem(key: string, value: any): void {
     localStorage.setItem(key, value);
     this.storageSubject.next({ key, value });
+  }
+
+  getItem(key: string): any {
+    return localStorage.getItem(key);
   }
 
   removeItem(key: string): void {

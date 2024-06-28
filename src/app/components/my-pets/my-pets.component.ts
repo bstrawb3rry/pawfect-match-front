@@ -4,6 +4,7 @@ import { Pet } from 'src/app/models/pet.model';
 import { PetService } from 'src/app/services/pet.service';
 import { PetDetailsDialogComponent } from '../pet-details-dialog/pet-details-dialog.component';
 import { AddPetDialogComponent } from '../add-pet-dialog/add-pet-dialog.component';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-my-pets',
@@ -17,10 +18,16 @@ export class MyPetsComponent implements OnInit {
 
   constructor(private petService: PetService,
     private changeDetectorRef: ChangeDetectorRef,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private storageService: StorageService
   ) {}
 
   ngOnInit(): void {
+    this.storageService.watchStorage().subscribe((data) => {
+      if (data && data.key === 'ownerId') {
+        this.ownerId = data.value;
+      }
+    });
     this.ownerId = +localStorage.getItem('ownerId');
     this.loadMyPets();
   }

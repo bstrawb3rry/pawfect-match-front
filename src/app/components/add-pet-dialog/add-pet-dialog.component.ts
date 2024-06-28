@@ -3,29 +3,30 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PetService } from 'src/app/services/pet.service';
 import { Pet } from 'src/app/models/pet.model';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-add-pet-dialog',
   templateUrl: './add-pet-dialog.component.html',
   styleUrls: ['./add-pet-dialog.component.scss']
 })
-export class AddPetDialogComponent implements OnInit{
+export class AddPetDialogComponent implements OnInit {
   @Output() petAdded = new EventEmitter<void>();
-  
-  selectedPetType: string;
+
   ownerId: number;
   petForm: FormGroup;
   petTypes: string[] = ['Dog', 'Cat'];
   genders: string[] = ['Male', 'Female'];
   colors: string[] = [];
-  breeds: string[] = []; 
+  breeds: string[] = [];
   petId: number;
   selectedFiles: File[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<AddPetDialogComponent>,
     private fb: FormBuilder,
-    private petService: PetService
+    private petService: PetService,
+    private storageService: StorageService
   ) {
     this.petForm = this.fb.group({
       type: ['', Validators.required],
@@ -39,35 +40,45 @@ export class AddPetDialogComponent implements OnInit{
       awards: ['']
     });
   }
-  
+
 
   ngOnInit(): void {
+    this.storageService.watchStorage().subscribe((data) => {
+      if (data && data.key === 'ownerId') {
+        this.ownerId = data.value;
+      }
+    });
+
     this.ownerId = +localStorage.getItem('ownerId');
-    this.selectedPetType = localStorage.getItem('selectedPetType');
-    this.loadBreeds();
-    this.loadColors();
+
+    this.petForm.get('type').valueChanges.subscribe(selectedType => {
+      this.loadBreeds(selectedType);
+      this.loadColors(selectedType);
+    });
   }
 
   onCancel(): void {
     this.dialogRef.close();
   }
 
-  loadBreeds(): void {
-    this.petService.getBreedsByType(this.selectedPetType)
-      .subscribe((breeds: string[] | null) => {
+  loadBreeds(petType: string): void {
+    if (petType) {
+      this.petService.getBreedsByType(petType).subscribe((breeds: string[] | null) => {
         if (breeds) {
           this.breeds = breeds;
         }
       });
+    }
   }
 
-  loadColors(): void {
-    this.petService.getColorsByType(this.selectedPetType)
-      .subscribe((colors: string[] | null) => {
+  loadColors(petType: string): void {
+    if (petType) {
+      this.petService.getColorsByType(petType).subscribe((colors: string[] | null) => {
         if (colors) {
           this.colors = colors;
         }
       });
+    }
   }
 
   onFileChange(event: any): void {
@@ -81,23 +92,21 @@ export class AddPetDialogComponent implements OnInit{
 
   addPet(): void {
     if (this.petForm.valid) {
-      console.log(this.petForm.value);
       const ownerId = this.ownerId;
       const petDto: Pet = this.petForm.value;
 
-    this.petService.addPet(ownerId, petDto).subscribe(response => {
-      console.log('Pet added successfully', response);
-      console.log('Pet id', response.id);
-      console.log('Pet photos', this.selectedFiles);
-      this.selectedFiles.forEach((file, index) => {
-        this.petService.addPhoto(response.id, file).subscribe();
+      this.petService.addPet(ownerId, petDto).subscribe(response => {
+        this.selectedFiles.forEach((file, index) => {
+          this.petService.addPhoto(response.id, file).subscribe();
+        });
+        this.storageService.setItem('selectedPetId', response.id.toString());
+        this.storageService.setItem('selectedPetType', response.type);
+        this.dialogRef.close(this.petForm.value);
+        this.dialogRef.close(response);
+        this.petAdded.emit();
+      }, error => {
+        console.error('Error adding pet', error);
       });
-    this.dialogRef.close(this.petForm.value);
-      this.dialogRef.close(response);
-      this.petAdded.emit();
-    }, error => {
-      console.error('Error adding pet', error);
-    });
     }
   }
 

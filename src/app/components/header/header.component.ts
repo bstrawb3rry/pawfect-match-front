@@ -11,32 +11,46 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  private subscription: Subscription;
-  selectedValue: Pet;
-  ownerId: number;
+  selectedValue: Pet = {
+    id: -1, type: '',
+    name: '',
+    owner: undefined,
+    breed: '',
+    age: 0,
+    description: '',
+    gender: '',
+    color: '',
+    photoIds: []
+  };
+  ownerId: number = -1;
   myPets: Pet[] = [];
 
   constructor(private http: HttpClient, private petService: PetService, private storageService: StorageService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.ownerId = +localStorage.getItem('ownerId');
-    this.loadPetsByOwner();
+    if (this.ownerId !== -1) {
+      this.loadPetsByOwner();
+    }
+    
   }
 
   loadPetsByOwner(): void {
-    this.petService.getPetsByOwner(this.ownerId) // Hardcoded owner id 1
+    this.petService.getPetsByOwner(this.ownerId)
       .subscribe((pets: Pet[] | null) => {
         if (pets) {
           this.myPets = pets;
           this.selectedValue = this.myPets[0];
+          this.storageService.setItem('selectedPetId', this.selectedValue.id.toString());
+          this.storageService.setItem('selectedPetType', this.selectedValue.type);
         }
       });
   }
 
   onSelectionChange(event: any) {
     console.log('Selected value:', event.value);
-    localStorage.setItem('selectedPetId', this.selectedValue.id.toString());
-    localStorage.setItem('selectedPetType', this.selectedValue.type);
+    this.storageService.setItem('selectedPetId', event.value.id.toString());
+    this.storageService.setItem('selectedPetType', event.value.type);
   }
 }

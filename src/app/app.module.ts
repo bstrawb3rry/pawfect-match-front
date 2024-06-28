@@ -34,6 +34,7 @@ import { AddPetDialogComponent } from './components/add-pet-dialog/add-pet-dialo
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatMessageService } from './services/chat-message.service';
+import { AddChatDialogComponent } from './components/add-chat-dialog/add-chat-dialog.component';
 
 
 
@@ -53,7 +54,8 @@ import { ChatMessageService } from './services/chat-message.service';
     LoginComponent,
     AuthLayoutComponent,
     AddPetDialogComponent,
-    ChatComponent
+    ChatComponent,
+    AddChatDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +67,7 @@ import { ChatMessageService } from './services/chat-message.service';
     BrowserAnimationsModule,
     FormsModule,
     MatDialogModule,
+    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,

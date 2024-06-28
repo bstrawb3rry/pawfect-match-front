@@ -3,13 +3,14 @@ import { Injectable } from "@angular/core";
 import { User } from "../models/user.model";
 import { Observable, map } from "rxjs";
 import { Router } from "@angular/router";
+import { StorageService } from "./storage.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private storageService: StorageService) { }
 
   path = '/api/auth';
 
@@ -18,18 +19,23 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post<{ jwt: string, ownerId: number }>(`${this.path}/login`, { username, password }).pipe(
-      map(response => {
-        // Store the JWT token in local storage
-        localStorage.setItem('jwt', response.jwt);
-        localStorage.setItem('ownerId', response.ownerId.toString());
-        return response;
-      })
-    );
+    return this.http
+      .post<{ jwt: string; ownerId: number }>(`${this.path}/login`, { username, password })
+      .pipe(
+        map((response) => {
+          this.storageService.setItem('jwt', response.jwt);
+          this.storageService.setItem('ownerId', response.ownerId.toString());
+          this.storageService.setItem('selectedPetId', -1);
+          return response;
+        })
+      );
   }
 
   logout(): void {
-    localStorage.removeItem('jwt'); // Remove the JWT token from local storage
-    this.router.navigate(['/login']); // Redirect to login page
+    this.storageService.removeItem('jwt');
+    this.storageService.removeItem('ownerId');
+    this.storageService.removeItem('selectedPetId');
+    this.storageService.removeItem('selectedPetType');
+    this.router.navigate(['/login']);
   }
 }

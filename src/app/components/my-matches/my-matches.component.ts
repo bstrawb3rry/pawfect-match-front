@@ -4,6 +4,7 @@ import { Pet } from 'src/app/models/pet.model';
 import { PetDetailsDialogComponent } from '../pet-details-dialog/pet-details-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-my-matches',
@@ -16,21 +17,35 @@ export class MyMatchesComponent implements OnInit {
   filters = {
     age: 1 // Default age filter value
   };
-  selectedPetId: number;
+  selectedPetId: number = -1;
 
   constructor(private petService: PetService,
     public dialog: MatDialog,
     private changeDetectorRef: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) {
-    this.selectedPetId = +localStorage.getItem('selectedPetId');
   }
 
   ngOnInit(): void {
-    this.loadFullMatches();
+    this.storageService.watchStorage().subscribe((data) => {
+      if (data && data.key === 'selectedPetId') {
+        this.selectedPetId = +data.value;
+      }
+
+      if (this.selectedPetId !== -0 && this.selectedPetId !== -1) {
+        this.loadFullMatches();
+      }
+    });
+    this.selectedPetId = +localStorage.getItem('selectedPetId');
+    
+    if (this.selectedPetId !== -0 && this.selectedPetId !== -1) {
+      this.loadFullMatches();
+    }
   }
 
   loadFullMatches(): void {
+    console.log('load full match: ', this.selectedPetId);
     this.petService.getPetsMatches(this.selectedPetId)
       .subscribe((matches: Pet[] | null) => {
         if (matches) {

@@ -5,6 +5,7 @@ import { MatchService } from 'src/app/services/match.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PetDetailsDialogComponent } from '../pet-details-dialog/pet-details-dialog.component';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 
 
 @Component({
@@ -14,14 +15,13 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  possibleMatches: Pet[];
+  possibleMatches: Pet[] = [];
   filteredMatches: any[] = [];
   filters = {
     age: 1 // Default age filter value
   };
   ownerId: number;
-  selectedPetId: number;
-  selectedPetType: string;
+  selectedPetId: number = -1;
 
 
   constructor(
@@ -29,18 +29,34 @@ export class DashboardComponent implements OnInit {
     private matchService: MatchService,
     public dialog: MatDialog,
     private changeDetectorRef: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) {
     this.possibleMatches = [];
     
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.storageService.watchStorage().subscribe((data) => {
+      if (data && data.key === 'selectedPetId') {
+        this.selectedPetId = +data.value;
+      }
+      if (data && data.key === 'ownerId') {
+        this.ownerId = data.value;
+      }
+
+      if (this.selectedPetId !== -0 && this.selectedPetId !== -1 && this.ownerId !== -1) {
+        this.loadMatches();
+      }
+      
+    });
+
     this.ownerId = +localStorage.getItem('ownerId');
     this.selectedPetId = +localStorage.getItem('selectedPetId');
-    this.selectedPetType = localStorage.getItem('selectedPetType');
-    this.loadMatches();
 
+    if (this.selectedPetId !== -0 && this.selectedPetId !== -1 && this.ownerId !== -1) {
+        this.loadMatches();
+      }
   }
 
   loadMatches() {

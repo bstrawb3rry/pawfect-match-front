@@ -1,19 +1,21 @@
 <div class="chat-container">
   <div class="chat-list">
-    <h3>My DMs</h3>
+    <h3>My DMs
+      <button (click)="addNewChat()">Add New Chat</button>
+    </h3>
     <ul>
       <li *ngFor="let chat of chats" (click)="selectChat(chat)">{{ getChatName(chat) }}</li>
     </ul>
   </div>
   <div class="chat-room">
     <h3>Chat Room</h3>
-    <div class="messages">
-      <div *ngFor="let message of messages" [ngClass]="{'sent': message.senderId === ownerId, 'received': message.senderId !== ownerId}">
+    <div class="messages" #messagesContainer>
+      <div *ngFor="let message of messages" [ngClass]="{'sent': message.senderId === selectedPetId, 'received': message.senderId !== selectedPetId}">
         <span>{{ message.content }}</span>
       </div>
     </div>
     <div class="input">
-      <input type="text" placeholder="Type a message" [(ngModel)]="newMessage" />
+      <input type="text" placeholder="Type a message" [(ngModel)]="newMessage" (keydown.enter)="sendMessage()"/>
       <button (click)="sendMessage()">Send</button>
     </div>
   </div>
