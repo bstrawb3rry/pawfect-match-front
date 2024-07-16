@@ -5,7 +5,12 @@
     <div *ngFor="let pet of myPets" class="gallery-item">
       <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name"></app-photo-gallery>
       <div class="details-button-container">
-        <button class="details-button" (click)="displayPetDetails(pet)">Details</button>
+        <button class="details-button" (click)="displayPetDetails(pet, false)">Details</button>
+      </div>
+      <div class="like-button-container">
+        <button class="like-button" (click)="displayPetDetails(pet, true)">
+          <img src="assets/paw.png" alt="Like">
+        </button>
       </div>
     </div>
 </div>

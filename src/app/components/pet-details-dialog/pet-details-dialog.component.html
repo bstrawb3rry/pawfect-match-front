@@ -4,19 +4,46 @@
     <app-photo-gallery [imageIds]="data.pet.photoIds" [petName]="data.pet.name"></app-photo-gallery>
   </div>
   <div class="col-md-6 details">
-    <p><strong>Age:</strong> {{ data.pet.age }}</p>
-    <p><strong>Color:</strong> {{ data.pet.color }}</p>
+    <p><strong>Age:</strong> 
+      <ng-container *ngIf="editMode; else viewMode">
+        <input type="number" [(ngModel)]="data.pet.age" />
+      </ng-container>
+      <ng-template #viewMode>
+        {{ data.pet.age }}
+      </ng-template>
+    </p>
+    <p><strong>Color:</strong> 
+      <ng-container *ngIf="editMode; else viewColor">
+        <mat-select [(ngModel)]="data.pet.color">
+          <mat-option *ngFor="let color of colors" [value]="color">{{ color }}</mat-option>
+        </mat-select>
+      </ng-container>
+      <ng-template #viewColor>
+        {{ data.pet.color }}
+      </ng-template>
+    </p>
     <p><strong>Gender:</strong> {{ data.pet.gender }}</p>
     <p><strong>Breed:</strong> {{ data.pet.breed }}</p>
-    <p><strong>Description:</strong> {{ data.pet.description }}</p>
+    <p><strong>Description:</strong> 
+      <ng-container *ngIf="editMode; else viewDescription">
+        <textarea [(ngModel)]="data.pet.description"></textarea>
+      </ng-container>
+      <ng-template #viewDescription>
+        {{ data.pet.description }}
+      </ng-template>
+    </p>
+    <p *ngIf="editMode"><strong>Add Pictures:</strong> 
+      <input id="picture" type="file" (change)="onFileChange($event)" multiple>
+    </p>
     <p><strong>Owner:</strong></p>
     <ul>
-      <li>Name: {{ data.pet.owner.firstName }}</li>
-      <li>Phone: {{ data.pet.owner.lastName }}</li>
+      <li>First Name: {{ data.pet.owner.firstName }}</li>
+      <li>Last Name: {{ data.pet.owner.lastName }}</li>
       <li>Email: {{ data.pet.owner.email }}</li>
     </ul>
   </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
+  <button mat-button *ngIf="editMode" (click)="saveChanges()">Save</button>
 </div>

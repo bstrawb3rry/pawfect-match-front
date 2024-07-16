@@ -15,7 +15,8 @@ export class MyMatchesComponent implements OnInit {
   fullMatches: Pet[] = [];
   filteredMatches: any[] = [];
   filters = {
-    age: 1 // Default age filter value
+    startAge: 1,  // Default start age filter value
+    endAge: 20   // Default end age filter value
   };
   selectedPetId: number = -1;
   hasPets: boolean = false;
@@ -57,7 +58,7 @@ export class MyMatchesComponent implements OnInit {
   }
 
   applyFilters(): void {
-    this.petService.getPetsMatches(this.selectedPetId, this.filters.age)
+    this.petService.getPetsMatches(this.selectedPetId, this.filters.startAge, this.filters.endAge)
       .subscribe(possibleMatches => {
         if (possibleMatches) {
           this.fullMatches = possibleMatches;

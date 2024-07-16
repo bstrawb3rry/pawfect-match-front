@@ -18,7 +18,8 @@ export class DashboardComponent implements OnInit {
   possibleMatches: Pet[] = [];
   filteredMatches: any[] = [];
   filters = {
-    age: 1 // Default age filter value
+    startAge: 1,  // Default start age filter value
+    endAge: 20   // Default end age filter value
   };
   ownerId: number;
   selectedPetId: number = -1;
@@ -79,7 +80,7 @@ export class DashboardComponent implements OnInit {
   }
 
   applyFilters(): void {
-    this.petService.getPetsForPossibleMatching(this.selectedPetId, this.ownerId, this.filters.age)
+    this.petService.getPetsForPossibleMatching(this.selectedPetId, this.ownerId, this.filters.startAge, this.filters.endAge)
       .subscribe(possibleMatches => {
         if (possibleMatches) {
           this.possibleMatches = possibleMatches;

@@ -17,9 +17,10 @@ export enum OrderDirection {
     path = '/api/pets';
 
    
-       getPetsForPossibleMatching(id: number, ownerId: number, age?: number): Observable<Pet[] | null> {
+       getPetsForPossibleMatching(id: number, ownerId: number, startAge?: number, endAge?: number): Observable<Pet[] | null> {
       let params = new HttpParams();
-      if (age !== undefined) params = params.set('age', age.toString());
+      if (startAge !== undefined) params = params.set('startAge', startAge.toString());
+      if (endAge !== undefined) params = params.set('endAge', endAge.toString());
       return this.http.get(this.path+ `/${id}/owner/${ownerId}`, { params })
         .pipe(
           map((response: unknown) => {
@@ -34,9 +35,10 @@ export enum OrderDirection {
 
 
 
-    getPetsMatches(id: number, age?: number, color?: string, awardName?: string, city?: string): Observable<Pet[] | null> {
+    getPetsMatches(id: number, startAge?: number, endAge?: number, color?: string, awardName?: string, city?: string): Observable<Pet[] | null> {
       let params = new HttpParams();
-      if (age !== undefined) params = params.set('age', age.toString());
+      if (startAge !== undefined) params = params.set('startAge', startAge.toString());
+      if (endAge !== undefined) params = params.set('endAge', endAge.toString());
       if (color) params = params.set('color', color);
       if (awardName) params = params.set('awardName', awardName);
       if (city) params = params.set('city', city);
@@ -98,6 +100,10 @@ export enum OrderDirection {
 
     addPet(ownerId: number, petDto: Pet): Observable<Pet> {
       return this.http.post<Pet>(`${this.path}/owner/${ownerId}`, petDto);
+    }
+
+    editPet(petDto: Pet): Observable<Pet> {
+      return this.http.put<Pet>(`${this.path}/edit`, petDto);
     }
 
     // addPhoto(petId: number, image: File): Observable<number> {

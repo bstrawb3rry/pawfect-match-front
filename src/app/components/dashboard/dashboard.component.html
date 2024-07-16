@@ -1,7 +1,11 @@
 <div class="filter-container" *ngIf="possibleMatches.length > 0;">
-  <label for="age">Age:</label>
-  <input type="range" id="age" [(ngModel)]="filters.age" name="age" min="0" max="20">
-  <output>{{ filters.age }} years</output>
+  <label for="start-age">Start Age:</label>
+  <input type="range" id="start-age" [(ngModel)]="filters.startAge" name="startAge" min="0" max="20">
+  <output>{{ filters.startAge }} years</output>
+
+  <label for="end-age">End Age:</label>
+  <input type="range" id="end-age" [(ngModel)]="filters.endAge" name="endAge" min="0" max="20">
+  <output>{{ filters.endAge }} years</output>
   <button class="apply-filters-button" (click)="applyFilters()">Apply Filters</button>
   <button class="cancel-filters-button" (click)="cancelFilters()">X</button>
 </div>

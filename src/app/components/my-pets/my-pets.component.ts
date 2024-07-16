@@ -41,10 +41,10 @@ export class MyPetsComponent implements OnInit {
       });
   }
 
-  displayPetDetails(pet: Pet): void {
+  displayPetDetails(pet: Pet, editMode: boolean): void {
     const dialogRef = this.dialog.open(PetDetailsDialogComponent, {
       width: '80%',
-      data: { pet }
+      data: { pet, editMode }
     });
 
     dialogRef.afterClosed().subscribe(result => {

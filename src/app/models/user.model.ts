@@ -1,3 +1,4 @@
+import { Address } from "./address.model";
 import { Owner } from "./owner.model";
 
 export class User {
@@ -6,6 +7,7 @@ export class User {
     password: string;
     enabled: boolean;
     petOwner: Owner;
+    address: Address;
   
     constructor(user: User) {
       this.id = user?.id;
@@ -13,5 +15,6 @@ export class User {
       this.password = user?.password;
       this.enabled = user?.enabled;
       this.petOwner = user?.petOwner;
+      this.address = user?.address;
     }
   }

@@ -35,6 +35,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatMessageService } from './services/chat-message.service';
 import { AddChatDialogComponent } from './components/add-chat-dialog/add-chat-dialog.component';
+import { GeolocationService } from './services/geolocation.service';
 
 
 
@@ -75,7 +76,7 @@ import { AddChatDialogComponent } from './components/add-chat-dialog/add-chat-di
     ReactiveFormsModule,
     MatFormFieldModule
   ],
-  providers: [PetService, MatchService, AuthService, StorageService, ChatMessageService,
+  providers: [PetService, MatchService, AuthService, StorageService, ChatMessageService, GeolocationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
