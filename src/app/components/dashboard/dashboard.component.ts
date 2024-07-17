@@ -17,12 +17,18 @@ export class DashboardComponent implements OnInit {
 
   possibleMatches: Pet[] = [];
   filteredMatches: any[] = [];
+  colors: string[] = [];
+  selectedColors: string[] = [];
   filters = {
-    startAge: 1,  // Default start age filter value
-    endAge: 20   // Default end age filter value
+    startAge: 1,
+    endAge: 25,
+    startKm: 0,
+    endKm: 4000,
+    colors: ['']
   };
   ownerId: number;
   selectedPetId: number = -1;
+  selectedPetType: string;
   hasPets: boolean = false;
 
 
@@ -43,6 +49,9 @@ export class DashboardComponent implements OnInit {
       if (data && data.key === 'selectedPetId') {
         this.selectedPetId = +data.value;
       }
+      if (data && data.key === 'selectedPetType') {
+        this.selectedPetType = data.value;
+      }
       if (data && data.key === 'ownerId') {
         this.ownerId = data.value;
       }
@@ -50,14 +59,23 @@ export class DashboardComponent implements OnInit {
       if (this.selectedPetId !== -0 && this.selectedPetId !== -1 && this.ownerId !== -1) {
         this.loadMatches();
       }
+
+      if (this.selectedPetType) {
+        this.loadColors(this.selectedPetType);
+      }
       
     });
 
     this.ownerId = +localStorage.getItem('ownerId');
     this.selectedPetId = +localStorage.getItem('selectedPetId');
+    this.selectedPetType = localStorage.getItem('selectedPetType');
 
     if (this.selectedPetId !== -0 && this.selectedPetId !== -1 && this.ownerId !== -1) {
         this.loadMatches();
+      }
+
+      if (this.selectedPetType) {
+        this.loadColors(this.selectedPetType);
       }
   }
 
@@ -72,6 +90,16 @@ export class DashboardComponent implements OnInit {
       });
   }
 
+  loadColors(petType: string): void {
+    if (petType) {
+      this.petService.getColorsByType(petType).subscribe((colors: string[] | null) => {
+        if (colors) {
+          this.colors = colors;
+        }
+      });
+    }
+  }
+
   likePet(receiverId: number) {
     this.matchService.createMatch(this.selectedPetId, receiverId).subscribe(() => {
       this.loadMatches();
@@ -79,8 +107,22 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  updateAgeRange(event: {minValue: number, maxValue: number}): void {
+    this.filters.startAge = event.minValue;
+    this.filters.endAge = event.maxValue;
+  }
+
+  updateKmRange(event: {minValue: number, maxValue: number}): void {
+    this.filters.startKm = event.minValue;
+    this.filters.endKm = event.maxValue;
+  }
+
+  onColorSelectionChange(event: any) {
+    this.filters.colors = this.selectedColors;
+  }
+  
   applyFilters(): void {
-    this.petService.getPetsForPossibleMatching(this.selectedPetId, this.ownerId, this.filters.startAge, this.filters.endAge)
+    this.petService.getPetsForPossibleMatching(this.selectedPetId, this.ownerId, this.filters.startAge, this.filters.endAge, this.filters.startKm, this.filters.endKm, this.filters.colors)
       .subscribe(possibleMatches => {
         if (possibleMatches) {
           this.possibleMatches = possibleMatches;

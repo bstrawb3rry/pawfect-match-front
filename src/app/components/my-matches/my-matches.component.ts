@@ -14,11 +14,17 @@ import { StorageService } from 'src/app/services/storage.service';
 export class MyMatchesComponent implements OnInit {
   fullMatches: Pet[] = [];
   filteredMatches: any[] = [];
+  colors: string[] = [];
+  selectedColors: string[] = [];
   filters = {
-    startAge: 1,  // Default start age filter value
-    endAge: 20   // Default end age filter value
+    startAge: 1,
+    endAge: 25,
+    startKm: 0,
+    endKm: 4000,
+    colors: ['']
   };
   selectedPetId: number = -1;
+  selectedPetType: string;
   hasPets: boolean = false;
 
   constructor(private petService: PetService,
@@ -34,15 +40,35 @@ export class MyMatchesComponent implements OnInit {
       if (data && data.key === 'selectedPetId') {
         this.selectedPetId = +data.value;
       }
+      if (data && data.key === 'selectedPetType') {
+        this.selectedPetType = data.value;
+      }
 
       if (this.selectedPetId !== -0 && this.selectedPetId !== -1) {
         this.loadFullMatches();
       }
+      if (this.selectedPetType) {
+        this.loadColors(this.selectedPetType);
+      }
     });
     this.selectedPetId = +localStorage.getItem('selectedPetId');
+    this.selectedPetType = localStorage.getItem('selectedPetType');
     
     if (this.selectedPetId !== -0 && this.selectedPetId !== -1) {
       this.loadFullMatches();
+    }
+    if (this.selectedPetType) {
+      this.loadColors(this.selectedPetType);
+    }
+  }
+
+  loadColors(petType: string): void {
+    if (petType) {
+      this.petService.getColorsByType(petType).subscribe((colors: string[] | null) => {
+        if (colors) {
+          this.colors = colors;
+        }
+      });
     }
   }
 
@@ -57,8 +83,22 @@ export class MyMatchesComponent implements OnInit {
       });
   }
 
+  updateAgeRange(event: {minValue: number, maxValue: number}): void {
+    this.filters.startAge = event.minValue;
+    this.filters.endAge = event.maxValue;
+  }
+
+  updateKmRange(event: {minValue: number, maxValue: number}): void {
+    this.filters.startKm = event.minValue;
+    this.filters.endKm = event.maxValue;
+  }
+
+  onColorSelectionChange(event: any) {
+    this.filters.colors = this.selectedColors;
+  }
+
   applyFilters(): void {
-    this.petService.getPetsMatches(this.selectedPetId, this.filters.startAge, this.filters.endAge)
+    this.petService.getPetsMatches(this.selectedPetId, this.filters.startAge, this.filters.endAge, this.filters.startKm, this.filters.endKm, this.filters.colors)
       .subscribe(possibleMatches => {
         if (possibleMatches) {
           this.fullMatches = possibleMatches;

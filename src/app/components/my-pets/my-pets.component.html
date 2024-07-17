@@ -3,13 +3,20 @@
 </div>
 <div class="gallery-container" *ngIf="myPets.length > 0; else noPetsTemplate">
     <div *ngFor="let pet of myPets" class="gallery-item">
+      <div class="card-header">
+        <button class="delete-button" (click)="confirmDeletePet(pet)">
+          <img src="assets/close.png" alt="Close">
+        </button>
+      </div>
       <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name"></app-photo-gallery>
       <div class="details-button-container">
-        <button class="details-button" (click)="displayPetDetails(pet, false)">Details</button>
+        <button class="details-button" (click)="displayPetDetails(pet, false)">
+          <img src="assets/details.png" alt="Details">
+        </button>
       </div>
-      <div class="like-button-container">
-        <button class="like-button" (click)="displayPetDetails(pet, true)">
-          <img src="assets/paw.png" alt="Like">
+      <div class="edit-button-container">
+        <button class="edit-button" (click)="displayPetDetails(pet, true)">
+          <img src="assets/edit.png" alt="Edit">
         </button>
       </div>
     </div>

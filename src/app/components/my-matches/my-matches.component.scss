@@ -34,30 +34,27 @@
 }
 
 .filter-container {
-    display: flex;
-    justify-content: center; /* Center the filter container */
-    align-items: center;
-    width: 90%; /* Make it full width */
-    padding: 20px; /* Add padding to give it some space */
-    margin-top: 60px;
-    margin-left: 10%;
+  display: flex;
+  justify-content: space-around; /* Space out the filters evenly */
+  align-items: center;
+  width: 90%;
+  padding: 20px;
+  margin: 20px auto; /* Center the container horizontally and add top margin */
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-right: -40px;
+  margin-top: 60px;
+}
 
-    background-color: #fff; /* Add a background color if needed */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add some shadow for better appearance */
-    border-radius: 10px;
-  }
-  
-  .filter-container label,
-  .filter-container input[type="range"],
-  .filter-container output,
-  .filter-container button {
-    margin-right: 10px; /* Space out the filter elements */
-  }
-  
-  .apply-filters-button,
-  .cancel-filters-button {
-    margin-left: 10px; /* Space between buttons */
-  }
+.filter-container app-range-slider {
+  margin-right: 20px; /* Add space between Age and Distance sliders */
+}
+
+.apply-filters-button,
+.cancel-filters-button {
+  margin-left: 10px; /* Space between buttons */
+}
 
   .no-matches-message {
     text-align: center;
@@ -89,4 +86,30 @@
         text-decoration: underline;
       }
     }
+  }
+
+  .details-button-container {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .details-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 5px;
+    transition: transform 0.3s;
+  }
+  
+  .details-button:hover {
+    transform: scale(1.2);
+  }
+  
+  .details-button img {
+    width: 30px; /* Adjust the size as needed */
+    height: 30px;
+    border-radius: 50%;
   }

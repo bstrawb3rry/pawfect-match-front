@@ -5,6 +5,7 @@ import { PetService } from 'src/app/services/pet.service';
 import { PetDetailsDialogComponent } from '../pet-details-dialog/pet-details-dialog.component';
 import { AddPetDialogComponent } from '../add-pet-dialog/add-pet-dialog.component';
 import { StorageService } from 'src/app/services/storage.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-my-pets',
@@ -60,6 +61,22 @@ export class MyPetsComponent implements OnInit {
     dialogRef.componentInstance.petAdded.subscribe(() => {
       this.loadMyPets();
       this.changeDetectorRef.detectChanges();
+    });
+  }
+
+  confirmDeletePet(pet: Pet): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deletePet(pet);
+      }
+    });
+  }
+
+  deletePet(pet: Pet): void {
+    this.petService.deletePet(pet.id).subscribe(() => {
+      this.myPets = this.myPets.filter(p => p.id !== pet.id);
     });
   }
 }

@@ -1,11 +1,12 @@
-<div class="filter-container" *ngIf="fullMatches.length > 0;">
-  <label for="start-age">Start Age:</label>
-  <input type="range" id="start-age" [(ngModel)]="filters.startAge" name="startAge" min="0" max="20">
-  <output>{{ filters.startAge }} years</output>
-
-  <label for="end-age">End Age:</label>
-  <input type="range" id="end-age" [(ngModel)]="filters.endAge" name="endAge" min="0" max="20">
-  <output>{{ filters.endAge }} years</output>
+<div class="filter-container">
+  <app-range-slider [minValue]="1" [maxValue]="25" [minLabel]="'year/s'" [maxLabel]="'year/s'" [label]="'Age'" (ageRangeChanged)="updateAgeRange($event)"></app-range-slider>
+  <app-range-slider [minValue]="0" [maxValue]="4000" [minLabel]="'km'" [maxLabel]="'km'" [label]="'Distance'" (ageRangeChanged)="updateKmRange($event)"></app-range-slider>
+  <span>Color</span>
+  <mat-form-field>
+    <mat-select [(ngModel)]="selectedColors" multiple (selectionChange)="onColorSelectionChange($event)" placeholder="Select Color">
+      <mat-option *ngFor="let color of colors" [value]="color">{{ color }}</mat-option>
+    </mat-select>
+  </mat-form-field>
   <button class="apply-filters-button" (click)="applyFilters()">Apply Filters</button>
   <button class="cancel-filters-button" (click)="cancelFilters()">X</button>
 </div>
@@ -14,7 +15,9 @@
   <div *ngFor="let pet of fullMatches" class="gallery-item">
     <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name"></app-photo-gallery>
     <div class="details-button-container">
-      <button class="details-button" (click)="displayPetDetails(pet)">Details</button>
+      <button class="details-button" (click)="displayPetDetails(pet)">
+        <img src="assets/details.png" alt="Details">
+      </button>
     </div>
   </div>
 </div>

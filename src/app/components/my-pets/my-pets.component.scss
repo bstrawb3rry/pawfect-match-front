@@ -56,13 +56,13 @@
   margin: 50px auto;
 }
 
-.like-button-container {
+.edit-button-container {
   position: absolute;
   bottom: 10px;
   right: 10px;
 }
 
-.like-button {
+.edit-button {
   background-color: transparent;
   border: none;
   outline: none;
@@ -72,12 +72,64 @@
   transition: transform 0.3s;
 }
 
-.like-button:hover {
+.edit-button:hover {
   transform: scale(1.2);
 }
 
-.like-button img {
+.edit-button img {
   width: 30px; /* Adjust the size as needed */
   height: 30px;
+  border-radius: 50%;
+}
+
+.details-button-container {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.details-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 5px;
+  transition: transform 0.3s;
+}
+
+.details-button:hover {
+  transform: scale(1.2);
+}
+
+.details-button img {
+  width: 30px; /* Adjust the size as needed */
+  height: 30px;
+  border-radius: 50%;
+}
+
+.card-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 5px;
+  transition: transform 0.3s;
+}
+
+.delete-button:hover {
+  transform: scale(1.2);
+}
+
+.delete-button img {
+  width: 20px; /* Adjust the size as needed */
+  height: 20px;
   border-radius: 50%;
 }

@@ -1,12 +1,6 @@
 <div *ngIf="imageIds && imageIds.length > 0" class="photo-gallery-container">
     <img [src]="currentImageSrc" [alt]="petName" class="fade image-active">
 
-    <div *ngIf="indicators" class="photo-gallery-dot-container">
-        <span *ngFor="let dot of imageIds; let i=index" class="dot" [ngClass]="{'active': selectedIndex === i}"
-            (click)="selectImage(i)">
-        </span>
-    </div>
-
     <div>
         <p style="margin-top: 20px;">{{petName}}</p>
     </div>

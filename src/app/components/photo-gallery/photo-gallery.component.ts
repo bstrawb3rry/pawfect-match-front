@@ -31,11 +31,7 @@ export class PhotoGalleryComponent implements OnInit {
       }
     }
   }
-
-  selectImage(index: number): void {
-    this.selectedIndex = index;
-  }
-
+  
   onPrevClick(): void {
     if (this.selectedIndex === 0 && this.imageIds) {
       this.selectedIndex = this.imageIds.length - 1;

@@ -36,6 +36,9 @@ import { ChatComponent } from './components/chat/chat.component';
 import { ChatMessageService } from './services/chat-message.service';
 import { AddChatDialogComponent } from './components/add-chat-dialog/add-chat-dialog.component';
 import { GeolocationService } from './services/geolocation.service';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { RangeSliderComponent } from './components/range-slider/range-slider.component';
 
 
 
@@ -56,7 +59,9 @@ import { GeolocationService } from './services/geolocation.service';
     AuthLayoutComponent,
     AddPetDialogComponent,
     ChatComponent,
-    AddChatDialogComponent
+    AddChatDialogComponent,
+    ConfirmDialogComponent,
+    RangeSliderComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +79,8 @@ import { GeolocationService } from './services/geolocation.service';
     MatIconModule,
     MatCardModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSliderModule
   ],
   providers: [PetService, MatchService, AuthService, StorageService, ChatMessageService, GeolocationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
