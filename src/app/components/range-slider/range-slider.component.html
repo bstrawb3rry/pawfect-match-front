@@ -1,0 +1,13 @@
+<div class="range-slider">
+    <div class="slider-container">
+        <span>{{ label }}</span>
+        <mat-slider [min]="minValue" [max]="maxValue">
+            <input [(ngModel)]="min" matSliderStartThumb (input)="onStartChange($event)">
+            <input [(ngModel)]="max" matSliderEndThumb (input)="onEndChange($event)">
+        </mat-slider>
+    </div>
+    <div>
+        <span>{{ min }} {{ minLabel }}</span>
+        <span>{{ max }} {{ maxLabel }}</span>
+    </div>
+</div>
