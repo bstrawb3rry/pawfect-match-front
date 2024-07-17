@@ -10,6 +10,7 @@ export class AddChatDialogComponent implements OnInit {
   receivers = this.data.receivers;
   selectedReceiver: number | null = null;
   initialMessage: string = '';
+  title = this.data.title;
 
   constructor(
     public dialogRef: MatDialogRef<AddChatDialogComponent>,

@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PetDetailsDialogComponent } from '../pet-details-dialog/pet-details-dialog.component';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class DashboardComponent implements OnInit {
   colors: string[] = [];
   selectedColors: string[] = [];
   filters = {
-    startAge: 1,
+    startAge: 0,
     endAge: 25,
     startKm: 0,
     endKm: 4000,
@@ -38,7 +39,8 @@ export class DashboardComponent implements OnInit {
     public dialog: MatDialog,
     private changeDetectorRef: ChangeDetectorRef,
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private snackBar: MatSnackBar
   ) {
     this.possibleMatches = [];
     
@@ -101,9 +103,24 @@ export class DashboardComponent implements OnInit {
   }
 
   likePet(receiverId: number) {
-    this.matchService.createMatch(this.selectedPetId, receiverId).subscribe(() => {
+    this.matchService.createMatch(this.selectedPetId, receiverId).subscribe((response: boolean) => {
+      console.log('response ', response);
+      if(response && response == true) {
+        this.showMatchNotification();
+    }
       this.loadMatches();
       this.changeDetectorRef.detectChanges();
+    });
+  }
+
+  showMatchNotification() {
+    const config = new MatSnackBarConfig();
+    config.verticalPosition = 'top';
+    config.horizontalPosition = 'center';
+    config.duration = 3000;
+    this.snackBar.open('Hurray! It\'s a Match!', 'Close', {
+      ...config,
+      panelClass: ['custom-snackbar']
     });
   }
 

@@ -37,8 +37,10 @@ export class ChatComponent implements OnInit {
       id: -1,
       senderId: -1,
       senderName: null,
+      senderOwner: null,
       receiverId: -1,
       receiverName: null,
+      receiverOwner: null,
       content: "Say hello to your furry friend's owner!",
       timestamp: null
     }));
@@ -88,7 +90,8 @@ export class ChatComponent implements OnInit {
   }
 
   getChatName(chat: ChatMessage) {
-    return chat.senderId == this.selectedPetId ? chat.receiverName : chat.senderName;
+    return chat.senderId == this.selectedPetId ? chat.receiverOwner + ' - ' + chat.receiverName : 
+    chat.senderOwner + ' - ' + chat.senderName;
   }
 
   getReceiverId(chat: ChatMessage) {
@@ -117,8 +120,10 @@ export class ChatComponent implements OnInit {
         id: -1,
         senderId: this.selectedPetId,
         senderName: null,
+        senderOwner: null,
         receiverId: this.selectedReceiverId,
         receiverName: null,
+        receiverOwner: null,
         content: this.newMessage,
         timestamp: null
       });
@@ -133,7 +138,7 @@ export class ChatComponent implements OnInit {
   addNewChat(): void {
     const dialogRef = this.dialog.open(AddChatDialogComponent, {
       width: '250px',
-      data: { receivers: this.contacts }
+      data: { receivers: this.contacts, title: 'Add New Chat' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -148,8 +153,10 @@ export class ChatComponent implements OnInit {
       id: -1,
       senderId: this.selectedPetId,
       senderName: null,
+      senderOwner: null,
       receiverId: receiver,
       receiverName: null,
+      receiverOwner: null,
       content: message,
       timestamp: null
     });

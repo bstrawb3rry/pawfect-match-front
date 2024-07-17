@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
     owner: undefined,
     breed: '',
     age: 0,
+    birthdate: undefined,
     description: '',
     gender: '',
     color: '',

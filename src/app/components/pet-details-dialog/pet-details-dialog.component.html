@@ -4,13 +4,18 @@
     <app-photo-gallery [imageIds]="data.pet.photoIds" [petName]="data.pet.name"></app-photo-gallery>
   </div>
   <div class="col-md-6 details">
-    <p><strong>Age:</strong> 
+    <p><strong>Birthdate:</strong> 
       <ng-container *ngIf="editMode; else viewMode">
-        <input type="number" [(ngModel)]="data.pet.age" />
+        <input matInput [matDatepicker]="picker" [(ngModel)]="data.pet.birthdate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </ng-container>
       <ng-template #viewMode>
-        {{ data.pet.age }}
+        {{ data.pet.birthdate }}
       </ng-template>
+    </p>
+    <p><strong>Age:</strong> 
+      {{ data.pet.age }}
     </p>
     <p><strong>Color:</strong> 
       <ng-container *ngIf="editMode; else viewColor">

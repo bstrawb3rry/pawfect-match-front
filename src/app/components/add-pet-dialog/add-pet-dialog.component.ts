@@ -33,11 +33,11 @@ export class AddPetDialogComponent implements OnInit {
       breed: ['', Validators.required],
       name: ['', Validators.required],
       gender: ['', Validators.required],
-      age: ['', Validators.required],
+      birthdate: ['', Validators.required],
       color: ['', Validators.required],
       pictures: [[], Validators.required],
       description: ['', Validators.required],
-      awards: ['']
+      // awards: ['']
     });
   }
 

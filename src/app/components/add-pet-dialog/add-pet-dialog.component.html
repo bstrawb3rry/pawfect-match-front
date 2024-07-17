@@ -28,8 +28,10 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Age</mat-label>
-      <input matInput formControlName="age" type="number" />
+      <mat-label>Birthdate</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="birthdate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
@@ -49,10 +51,10 @@
       <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
 
-    <mat-form-field>
+    <!-- <mat-form-field>
       <mat-label>Awards</mat-label>
       <input matInput formControlName="awards" />
-    </mat-form-field>
+    </mat-form-field> -->
   </form>
 </div>
 <div mat-dialog-actions>

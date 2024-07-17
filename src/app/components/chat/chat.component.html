@@ -1,16 +1,21 @@
 <div class="chat-container">
   <div class="chat-list">
-    <h3>My DMs
+    <div class="chat-header">
+    <h3>My DMs</h3>
       <button class="add-new-chat-button" mat-icon-button (click)="addNewChat()">
         <mat-icon>add</mat-icon>
       </button>
-    </h3>
+  </div>
     <ul>
-      <li *ngFor="let chat of chats" (click)="selectChat(chat)">{{ getChatName(chat) }}</li>
+      <li *ngFor="let chat of chats" (click)="selectChat(chat)" [class.selected-chat]="chat.id === selectedChatId">
+        {{ getChatName(chat) }}
+      </li>
     </ul>
   </div>
   <div class="chat-room">
-    <h3>Chat Room</h3>
+    <div class="chat-header">
+      <h3>Chat Room</h3>
+    </div>
     <div class="messages" #messagesContainer>
       <div *ngFor="let message of messages" [ngClass]="{'sent': message.senderId === selectedPetId, 'received': message.senderId !== selectedPetId}">
         <span>{{ message.content }}</span>

@@ -39,8 +39,9 @@ import { GeolocationService } from './services/geolocation.service';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { RangeSliderComponent } from './components/range-slider/range-slider.component';
-
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { RangeSliderComponent } from './components/range-slider/range-slider.com
     CommonModule,
     HttpClientModule,
     MatToolbarModule,
+    MatSnackBarModule,
     MatSelectModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -79,6 +81,8 @@ import { RangeSliderComponent } from './components/range-slider/range-slider.com
     MatIconModule,
     MatCardModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatFormFieldModule,
     MatSliderModule
   ],

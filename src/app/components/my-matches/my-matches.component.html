@@ -1,5 +1,5 @@
 <div class="filter-container">
-  <app-range-slider [minValue]="1" [maxValue]="25" [minLabel]="'year/s'" [maxLabel]="'year/s'" [label]="'Age'" (ageRangeChanged)="updateAgeRange($event)"></app-range-slider>
+  <app-range-slider [minValue]="0" [maxValue]="25" [minLabel]="'year/s'" [maxLabel]="'year/s'" [label]="'Age'" (ageRangeChanged)="updateAgeRange($event)"></app-range-slider>
   <app-range-slider [minValue]="0" [maxValue]="4000" [minLabel]="'km'" [maxLabel]="'km'" [label]="'Distance'" (ageRangeChanged)="updateKmRange($event)"></app-range-slider>
   <span>Color</span>
   <mat-form-field>
@@ -8,12 +8,17 @@
     </mat-select>
   </mat-form-field>
   <button class="apply-filters-button" (click)="applyFilters()">Apply Filters</button>
-  <button class="cancel-filters-button" (click)="cancelFilters()">X</button>
+  <button class="cancel-filters-button" (click)="cancelFilters()">Remove all Filters</button>
 </div>
 
 <div class="gallery-container" *ngIf="fullMatches.length > 0; else noMatchesTemplate">
   <div *ngFor="let pet of fullMatches" class="gallery-item">
     <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name"></app-photo-gallery>
+    <div class="chat-button-container">
+      <button class="chat-button" (click)="chatPet(pet)">
+        <img src="assets/chat.png" alt="Create Chat">
+      </button>
+    </div>
     <div class="details-button-container">
       <button class="details-button" (click)="displayPetDetails(pet)">
         <img src="assets/details.png" alt="Details">

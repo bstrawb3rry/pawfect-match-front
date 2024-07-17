@@ -4,6 +4,7 @@
     justify-content: center; /* Center the items horizontally */
     padding-top: 40px; /* Add more space between the header and the cards */
     margin-left: 180px; /* Adjust this value to reduce the space between the sidebar and the cards */
+    margin-top: 90px;
   }
   
   .gallery-item {
@@ -33,15 +34,32 @@
     object-fit: cover; // Covers the container fully, cropping if necessary
 }
 
+
 .add-pet-button-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 50px;
+  position: absolute;
+  top: 90px;
+  right: 25px;
 }
 
 .add-pet-button {
-  position: relative;
-  z-index: 1;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 5px;
+  transition: transform 0.3s;
+}
+
+.add-pet-button:hover {
+  transform: scale(1.2);
+}
+
+.add-pet-button img {
+  width: 60px;
+  /* Adjust the size as needed */
+  height: 60px;
+  border-radius: 50%;
 }
 
 

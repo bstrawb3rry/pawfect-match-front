@@ -5,6 +5,9 @@ import { PetDetailsDialogComponent } from '../pet-details-dialog/pet-details-dia
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
+import { ChatMessage } from 'src/app/models/chat-message.model';
+import { AddChatDialogComponent } from '../add-chat-dialog/add-chat-dialog.component';
+import { ChatMessageService } from 'src/app/services/chat-message.service';
 
 @Component({
   selector: 'app-my-matches',
@@ -17,7 +20,7 @@ export class MyMatchesComponent implements OnInit {
   colors: string[] = [];
   selectedColors: string[] = [];
   filters = {
-    startAge: 1,
+    startAge: 0,
     endAge: 25,
     startKm: 0,
     endKm: 4000,
@@ -28,6 +31,7 @@ export class MyMatchesComponent implements OnInit {
   hasPets: boolean = false;
 
   constructor(private petService: PetService,
+    private chatMessageService: ChatMessageService, 
     public dialog: MatDialog,
     private changeDetectorRef: ChangeDetectorRef,
     private router: Router,
@@ -130,5 +134,35 @@ export class MyMatchesComponent implements OnInit {
 
   redirectToMyPets(): void {
     this.router.navigate(['/my-pets']);
+  }
+
+  chatPet(pet: Pet): void {
+    const dialogRef = this.dialog.open(AddChatDialogComponent, {
+      width: '250px',
+      data: {title: 'Start a Chat with ' + pet.name }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.createNewChat(pet.id, result.message);
+      }
+    });
+  }
+
+  createNewChat(receiver: any, message: string): void {
+    const newChat = new ChatMessage({
+      id: -1,
+      senderId: this.selectedPetId,
+      senderName: null,
+      senderOwner: null,
+      receiverId: receiver,
+      receiverName: null,
+      receiverOwner: null,
+      content: message,
+      timestamp: null
+    });
+
+    this.chatMessageService.sendMessage(newChat);
+    this.router.navigate(['/my-dms']);
   }
 }

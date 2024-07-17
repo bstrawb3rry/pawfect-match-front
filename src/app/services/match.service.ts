@@ -10,7 +10,7 @@ export class MatchService {
 
   constructor(private http: HttpClient) {}
 
-  createMatch(initiatorId: number, receiverId: number): Observable<any> {
-    return this.http.put(`${this.path}/initiator/${initiatorId}/receiver/${receiverId}`, {});
+  createMatch(initiatorId: number, receiverId: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.path}/initiator/${initiatorId}/receiver/${receiverId}`, {});
   }
 }

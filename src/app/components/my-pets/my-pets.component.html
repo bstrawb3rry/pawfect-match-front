@@ -1,5 +1,7 @@
 <div class="add-pet-button-container">
-  <button mat-raised-button color="primary" (click)="openAddPetDialog()">Add Pet</button>
+  <button class="add-pet-button" (click)="openAddPetDialog()">
+    <img src="assets/add-pet.png" alt="Add Pet">
+  </button>
 </div>
 <div class="gallery-container" *ngIf="myPets.length > 0; else noPetsTemplate">
     <div *ngFor="let pet of myPets" class="gallery-item">

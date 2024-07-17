@@ -47,6 +47,7 @@ export class PetDetailsDialogComponent implements OnInit {
   }
 
   saveChanges() {
+    this.data.pet.birthdate = this.formatDate(this.data.pet.birthdate);
     this.petService.editPet(this.data.pet).subscribe(response => {
       this.data.pet = response;
     }, error => {
@@ -54,5 +55,12 @@ export class PetDetailsDialogComponent implements OnInit {
     });
     console.log('Changes saved:', this.data.pet);
     this.dialogRef.close(this.data.pet);
+  }
+
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
   }
 }
