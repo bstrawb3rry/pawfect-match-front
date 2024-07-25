@@ -21,7 +21,8 @@ export class HeaderComponent implements OnInit {
     description: '',
     gender: '',
     color: '',
-    photoIds: []
+    photoIds: [],
+    distance: -1
   };
   ownerId: number = -1;
   myPets: Pet[] = [];

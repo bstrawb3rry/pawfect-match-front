@@ -45,7 +45,7 @@ export class MyPetsComponent implements OnInit {
   displayPetDetails(pet: Pet, editMode: boolean): void {
     const dialogRef = this.dialog.open(PetDetailsDialogComponent, {
       width: '80%',
-      data: { pet, editMode }
+      data: { pet: pet, editMode: editMode, ownerInfo: true }
     });
 
     dialogRef.afterClosed().subscribe(result => {

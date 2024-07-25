@@ -21,7 +21,7 @@
 
 <div class="gallery-container" *ngIf="fullMatches.length > 0; else noMatchesTemplate">
   <div *ngFor="let pet of fullMatches" class="gallery-item">
-    <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name"></app-photo-gallery>
+    <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name" [distance]="pet.distance"></app-photo-gallery>
     <div class="chat-button-container">
       <button class="chat-button" (click)="chatPet(pet)">
         <img src="assets/chat.png" alt="Create Chat">

@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PetService } from 'src/app/services/pet.service';
 import { Pet } from 'src/app/models/pet.model';
 import { PetDetailsDialogComponent } from '../pet-details-dialog/pet-details-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/services/storage.service';
 import { ChatMessage } from 'src/app/models/chat-message.model';
@@ -112,6 +112,7 @@ export class MyMatchesComponent implements OnInit {
   }
 
   cancelFilters(): void {
+    this.selectedColors = [];
     this.petService.getPetsMatches(this.selectedPetId)
       .subscribe(fullMatches => {
         if (fullMatches) {
@@ -123,8 +124,8 @@ export class MyMatchesComponent implements OnInit {
 
   displayPetDetails(pet: Pet): void {
     const dialogRef = this.dialog.open(PetDetailsDialogComponent, {
-      width: '80%',
-      data: { pet }
+      width: '100%',
+      data: { pet: pet, editMode: false, ownerInfo: true }
     });
 
     dialogRef.afterClosed().subscribe(result => {

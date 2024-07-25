@@ -21,7 +21,7 @@
   max-width: 300px;
   padding: 20px;
   border-right: 1px solid #ccc;
-  height: calc(100vh - 40px); /* Adjust height */
+  height: 600px;
 }
 
 .chat-list ul {
@@ -49,7 +49,7 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  height: calc(100vh - 40px); /* Adjust height */
+  height: 600px;
   padding-right: 30px;
   overflow-y: auto; /* Add vertical scroll */
 }

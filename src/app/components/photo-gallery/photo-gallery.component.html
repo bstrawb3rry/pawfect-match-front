@@ -3,6 +3,7 @@
 
     <div>
         <p style="margin-top: 20px;">{{petName}}</p>
+        <p *ngIf="distance && distance != -1" style="margin-top: 20px;">{{distance}} km</p>
     </div>
 
     <button *ngIf="controls" class="btn-photo-gallery btn-prev" (click)="onPrevClick()">

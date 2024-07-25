@@ -12,6 +12,7 @@ export class Pet {
     gender: string;
     color: string;
     photoIds: number[];
+    distance: number;
   
     constructor(pet: Pet) {
       this.id = pet?.id;
@@ -25,6 +26,7 @@ export class Pet {
       this.gender = pet?.gender;
       this.color = pet?.color;
       this.photoIds = pet?.photoIds;
+      this.distance = pet?.distance;
     }
   }
   

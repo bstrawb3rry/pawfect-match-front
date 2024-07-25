@@ -59,12 +59,13 @@
           <label for="breed"><strong>Breed:</strong></label>
           <p id="breed">{{ data.pet.breed }}</p>
         </div>
-        <div class="form-group owner-info">
+        <div class="form-group owner-info" *ngIf="ownerInfo">
           <p><strong>Owner:</strong></p>
           <ul>
             <li>First Name: {{ data.pet.owner.firstName }}</li>
             <li>Last Name: {{ data.pet.owner.lastName }}</li>
             <li>Email: {{ data.pet.owner.email }}</li>
+            <li>Address: {{ data.pet.owner.address }}</li>
           </ul>
         </div>
       </div>

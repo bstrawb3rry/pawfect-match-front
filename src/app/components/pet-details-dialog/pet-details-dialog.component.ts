@@ -10,6 +10,7 @@ import { PetService } from 'src/app/services/pet.service';
 export class PetDetailsDialogComponent implements OnInit {
 
   editMode: boolean;
+  ownerInfo: boolean;
   petType: string;
   colors: string[] = [];
   selectedFiles: File[] = [];
@@ -20,6 +21,7 @@ export class PetDetailsDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.editMode = data.editMode;
+    this.ownerInfo = data.ownerInfo;
     this.petType = data.pet.type;
   }
 

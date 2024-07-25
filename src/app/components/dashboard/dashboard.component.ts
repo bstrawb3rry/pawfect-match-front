@@ -149,6 +149,7 @@ export class DashboardComponent implements OnInit {
   }
 
   cancelFilters(): void {
+    this.selectedColors = [];
     this.petService.getPetsForPossibleMatching(this.selectedPetId, this.ownerId)
       .subscribe(possibleMatches => {
         if (possibleMatches) {

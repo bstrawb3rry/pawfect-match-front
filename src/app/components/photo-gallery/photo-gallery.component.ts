@@ -11,6 +11,7 @@ export class PhotoGalleryComponent implements OnInit {
 
   @Input() imageIds: number[] | undefined;
   @Input() petName: string | undefined;
+  @Input() distance: number | undefined;
   @Input() indicators = true;
   @Input() controls = true;
 

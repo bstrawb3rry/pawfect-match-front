@@ -79,6 +79,7 @@ export class SignupComponent implements OnInit {
         firstName: this.signupForm.controls['firstName'].value,
         lastName: this.signupForm.controls['lastName'].value,
         email: this.signupForm.controls['email'].value,
+        address: undefined
       });
       var address = new Address({
         id: -1,

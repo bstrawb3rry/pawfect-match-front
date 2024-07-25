@@ -21,7 +21,7 @@
 
 <div class="gallery-container" *ngIf="possibleMatches.length > 0; else noMatchesTemplate" >
   <div *ngFor="let pet of possibleMatches" class="gallery-item">
-    <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name"></app-photo-gallery>
+    <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name" [distance]="pet.distance"></app-photo-gallery>
     <div class="like-button-container">
       <button class="like-button" (click)="likePet(pet.id)">
         <img src="assets/paw.png" alt="Like">
