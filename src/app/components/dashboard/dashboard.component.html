@@ -1,8 +1,8 @@
 <div class="filter-container">
-  <app-range-slider [minValue]="0" [maxValue]="25" [minLabel]="'year/s'" [maxLabel]="'year/s'" [label]="'Age'" (ageRangeChanged)="updateAgeRange($event)"></app-range-slider>
-  <app-range-slider [minValue]="0" [maxValue]="4000" [minLabel]="'km'" [maxLabel]="'km'" [label]="'Distance'" (ageRangeChanged)="updateKmRange($event)"></app-range-slider>
+  <app-range-slider class="age-slider" [maxValue]="25" [minLabel]="'year/s'" [maxLabel]="'year/s'" [label]="'Age'" (ageRangeChanged)="updateAgeRange($event)"></app-range-slider>
+  <app-range-slider class="distance-slider" [minValue]="0" [maxValue]="4000" [minLabel]="'km'" [maxLabel]="'km'" [label]="'Distance'" (ageRangeChanged)="updateKmRange($event)"></app-range-slider>
   <span>Color</span>
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <mat-select [(ngModel)]="selectedColors" multiple (selectionChange)="onColorSelectionChange($event)" placeholder="Select Color">
       <mat-option *ngFor="let color of colors" [value]="color">{{ color }}</mat-option>
     </mat-select>

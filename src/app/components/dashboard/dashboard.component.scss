@@ -95,6 +95,64 @@
   /* Space between buttons */
 }
 
+// .filter-container {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   width: 90%;
+//   padding: 20px;
+//   margin: 20px auto;
+//   background-color: #fff;
+//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+//   border-radius: 10px;
+
+//   .age-slider, .distance-slider {
+//     margin-right: 20px;
+//   }
+
+//   .slider {
+//     .mat-slider-thumb {
+//       background-color: #7d4aaf !important; /* Purple color for the thumb */
+//     }
+//     .mat-slider-track-fill {
+//       background-color: #7d4aaf !important; /* Purple color for the filled track */
+//     }
+//   }
+
+//   mat-form-field {
+//     margin-right: 20px;
+//     .mat-select-trigger {
+//       color: #7d4aaf; /* Purple color for the selected text */
+//     }
+//     .mat-select-arrow {
+//       color: #7d4aaf; /* Purple color for the arrow */
+//     }
+//     .mat-option {
+//       background-color: #f5f5f5;
+//       &:hover {
+//         background-color: #e0e0e0;
+//       }
+//     }
+    
+//   }
+
+//   .apply-filters-button,
+//   .cancel-filters-button {
+//     margin-left: 10px;
+//     padding: 10px 20px;
+//     border: none;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     color: #fff;
+//     background-color: #7d4aaf; /* Purple color */
+//     &:hover {
+//       background-color: #5b3a8c; /* Darker purple on hover */
+//     }
+//   }
+// }
+
+
+
 
 .no-matches-message {
   text-align: center;

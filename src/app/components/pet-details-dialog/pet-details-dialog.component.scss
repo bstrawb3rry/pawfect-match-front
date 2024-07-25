@@ -1,43 +1,220 @@
+// :host ::ng-deep app-photo-gallery {
+//   .photo-gallery-container {
+//     position: relative;
+//     margin: 10px auto;
+//     text-align: center;
+
+//     img {
+//       display: block;
+//       width: 100%;
+//       height: auto;
+//       max-width: 200px; /* Adjust this to make the images smaller */
+//       max-height: 200px; /* Adjust this to make the images smaller */
+//       border-radius: 15px;
+//     }
+//   }
+// }
+
+// .dialog-content {
+//   display: flex;
+//   flex-direction: row; /* Change to row to place items side by side */
+//   justify-content: space-between; /* Add some spacing between elements */
+//   padding: 20px;
+
+//   .details {
+//     width: 50%; /* Adjust the width to fit content side by side */
+//     text-align: left;
+
+//     h5 {
+//       margin-bottom: 10px;
+//       font-size: 1.5em;
+//       text-align: center;
+//     }
+
+//     p {
+//       margin: 5px 0;
+//       font-size: 1em;
+//     }
+
+//     ul {
+//       padding-left: 20px;
+//     }
+//   }
+// }
+
+// .mat-dialog-actions {
+//   justify-content: center;
+// }
+
+// :host ::ng-deep app-photo-gallery {
+//   .photo-gallery-container {
+//     position: relative;
+//     margin: 0 auto; /* Removed extra margin */
+//     text-align: center;
+
+//     img {
+//       display: block;
+//       width: 100%;
+//       height: auto;
+//       max-width: 150px; /* Adjusted to make the images smaller */
+//       max-height: 150px; /* Adjusted to make the images smaller */
+//       border-radius: 10px;
+//     }
+//   }
+// }
+
+// .dialog-content {
+//   display: flex;
+//   flex-direction: row; /* Place items side by side */
+//   justify-content: flex-start; /* Align items at the start */
+//   align-items: flex-start; /* Align items at the start */
+//   padding: 10px; /* Reduced padding */
+//   gap: 10px; /* Added gap to control space between elements */
+
+//   .details {
+//     width: calc(50% - 10px); /* Adjust the width to fit content side by side */
+//     text-align: left;
+
+//     h5 {
+//       margin-bottom: 5px;
+//       font-size: 1.2em;
+//       text-align: center;
+//     }
+
+//     p {
+//       margin: 3px 0; /* Reduced margin */
+//       font-size: 0.9em;
+//     }
+
+//     ul {
+//       padding-left: 15px;
+//     }
+
+//     .edit-field {
+//       display: block;
+//       width: 100%;
+//       margin: 3px 0; /* Reduced margin */
+//       padding: 8px;
+//       border: 1px solid #ac9cc4;
+//       border-radius: 4px;
+//       font-size: 0.9em;
+//     }
+
+//     .textarea {
+//       height: 80px;
+//       resize: vertical;
+//     }
+
+//     .birthdate-container {
+//       display: flex;
+//       align-items: center;
+
+//       .mat-datepicker-toggle {
+//         margin-left: 5px; /* Space between the date input and the calendar icon */
+//         color: #ac9cc4;
+//       }
+//     }
+//   }
+// }
+
+// .mat-dialog-actions {
+//   justify-content: center;
+// }
+
 :host ::ng-deep app-photo-gallery {
   .photo-gallery-container {
     position: relative;
-    margin: 10px auto;
+    margin: 0 auto; /* Centered */
     text-align: center;
 
     img {
       display: block;
       width: 100%;
       height: auto;
-      max-width: 200px; /* Adjust this to make the images smaller */
-      max-height: 200px; /* Adjust this to make the images smaller */
-      border-radius: 15px;
+      max-width: 200px; /* Adjusted to make the images smaller */
+      max-height: 200px; /* Adjusted to make the images smaller */
+      border-radius: 10px;
     }
   }
 }
 
 .dialog-content {
   display: flex;
-  flex-direction: row; /* Change to row to place items side by side */
-  justify-content: space-between; /* Add some spacing between elements */
-  padding: 20px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 30px; /* Increased gap between columns */
 
   .details {
-    width: 50%; /* Adjust the width to fit content side by side */
+    width: calc(70% - 10px);
     text-align: left;
 
-    h5 {
-      margin-bottom: 10px;
-      font-size: 1.5em;
-      text-align: center;
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Two columns */
+      gap: 80px; /* Gap between grid items */
+      align-items: start; /* Align items to the start */
     }
 
-    p {
-      margin: 5px 0;
-      font-size: 1em;
+    .form-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px; /* Gap between form groups */
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px; /* Add margin between form groups */
+
+        label {
+          margin-bottom: 3px;
+          font-size: 0.9em;
+        }
+
+        p, mat-select, input, textarea {
+          margin: 0;
+          font-size: 0.9em;
+          width: 100%; /* Ensure full width */
+        }
+
+        .edit-field {
+          margin: 0; /* Remove extra margin */
+        }
+      }
+
+      ul {
+        padding-left: 15px;
+      }
+
+      .edit-field {
+        display: block;
+        width: 100%;
+        margin: 3px 0; /* Reduced margin */
+        padding: 8px;
+        border: 1px solid #ac9cc4;
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+
+      .textarea {
+        height: 80px;
+        resize: vertical;
+      }
+
+      .birthdate-container {
+        display: flex;
+        align-items: center;
+
+        .mat-datepicker-toggle {
+          margin-left: 5px; /* Space between the date input and the calendar icon */
+          color: #ac9cc4;
+        }
+      }
     }
 
-    ul {
-      padding-left: 20px;
+    .owner-info {
+      grid-column: span 2; /* Span both columns */
     }
   }
 }
