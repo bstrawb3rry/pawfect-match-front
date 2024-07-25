@@ -1,4 +1,4 @@
-<div class="chat-container">
+<div *ngIf="contacts && contacts.length > 0; else noMatchesTemplate" class="chat-container">
   <div class="chat-list">
     <div class="chat-header">
     <h3>My DMs</h3>
@@ -27,3 +27,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #noMatchesTemplate>
+  <div class="no-matches-message">
+    No matching furry friends yet.. <br> Come back for a chat when you find your Pawfect Match!
+  </div>
+</ng-template>

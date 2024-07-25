@@ -2,13 +2,21 @@
   <app-range-slider class="age-slider" [maxValue]="25" [minLabel]="'year/s'" [maxLabel]="'year/s'" [label]="'Age'" (ageRangeChanged)="updateAgeRange($event)"></app-range-slider>
   <app-range-slider class="distance-slider" [minValue]="0" [maxValue]="4000" [minLabel]="'km'" [maxLabel]="'km'" [label]="'Distance'" (ageRangeChanged)="updateKmRange($event)"></app-range-slider>
   <span>Color</span>
-  <mat-form-field appearance="fill">
+  <mat-form-field class="color-select" appearance="outline">
     <mat-select [(ngModel)]="selectedColors" multiple (selectionChange)="onColorSelectionChange($event)" placeholder="Select Color">
       <mat-option *ngFor="let color of colors" [value]="color">{{ color }}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button class="apply-filters-button" (click)="applyFilters()">Apply Filters</button>
-  <button class="cancel-filters-button" (click)="cancelFilters()">Remove all Filters</button>
+  <div class="apply-filters-button">
+    <button class="like-button" (click)="applyFilters()">
+      <img src="assets/ok-filters.png" alt="Apply">
+    </button>
+  </div>
+  <div class="cancel-filters-button">
+    <button class="like-button" (click)="cancelFilters()">
+      <img src="assets/nok-filters.png" alt="Cancel">
+    </button>
+  </div>
 </div>
 
 <div class="gallery-container" *ngIf="possibleMatches.length > 0; else noMatchesTemplate" >

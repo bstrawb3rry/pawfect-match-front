@@ -36,8 +36,7 @@ export class AddPetDialogComponent implements OnInit {
       birthdate: ['', Validators.required],
       color: ['', Validators.required],
       pictures: [[], Validators.required],
-      description: ['', Validators.required],
-      // awards: ['']
+      description: ['', Validators.required]
     });
   }
 

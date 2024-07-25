@@ -54,6 +54,7 @@
   border-radius: 50%;
   padding: 5px;
   transition: transform 0.3s;
+  margin-left: 20px;
 }
 
 .like-button:hover {
@@ -66,93 +67,6 @@
   height: 30px;
   border-radius: 50%;
 }
-
-.filter-container {
-  display: flex;
-  justify-content: space-around;
-  /* Space out the filters evenly */
-  align-items: center;
-  width: 90%;
-  padding: 20px;
-  margin: 20px auto;
-  /* Center the container horizontally and add top margin */
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-
-  margin-right: -40px;
-  margin-top: 60px;
-}
-
-.filter-container app-range-slider {
-  margin-right: 20px;
-  /* Add space between Age and Distance sliders */
-}
-
-.apply-filters-button,
-.cancel-filters-button {
-  margin-left: 10px;
-  /* Space between buttons */
-}
-
-// .filter-container {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   width: 90%;
-//   padding: 20px;
-//   margin: 20px auto;
-//   background-color: #fff;
-//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-//   border-radius: 10px;
-
-//   .age-slider, .distance-slider {
-//     margin-right: 20px;
-//   }
-
-//   .slider {
-//     .mat-slider-thumb {
-//       background-color: #7d4aaf !important; /* Purple color for the thumb */
-//     }
-//     .mat-slider-track-fill {
-//       background-color: #7d4aaf !important; /* Purple color for the filled track */
-//     }
-//   }
-
-//   mat-form-field {
-//     margin-right: 20px;
-//     .mat-select-trigger {
-//       color: #7d4aaf; /* Purple color for the selected text */
-//     }
-//     .mat-select-arrow {
-//       color: #7d4aaf; /* Purple color for the arrow */
-//     }
-//     .mat-option {
-//       background-color: #f5f5f5;
-//       &:hover {
-//         background-color: #e0e0e0;
-//       }
-//     }
-    
-//   }
-
-//   .apply-filters-button,
-//   .cancel-filters-button {
-//     margin-left: 10px;
-//     padding: 10px 20px;
-//     border: none;
-//     border-radius: 5px;
-//     cursor: pointer;
-//     color: #fff;
-//     background-color: #7d4aaf; /* Purple color */
-//     &:hover {
-//       background-color: #5b3a8c; /* Darker purple on hover */
-//     }
-//   }
-// }
-
-
-
 
 .no-matches-message {
   text-align: center;
@@ -214,17 +128,118 @@
 }
 
 ::ng-deep .mat-snack-bar-container.custom-snackbar {
-  background-color: #ffffff !important; /* White background */
-  color: #000000 !important; /* Black text */
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2) !important; /* Optional: Add a subtle shadow */
-  border-radius: 4px !important; /* Optional: Add some border radius */
-  margin: 10px !important; /* Optional: Add some margin */
+  background-color: #ffffff !important;
+  /* White background */
+  color: #000000 !important;
+  /* Black text */
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2) !important;
+  /* Optional: Add a subtle shadow */
+  border-radius: 4px !important;
+  /* Optional: Add some border radius */
+  margin: 10px !important;
+  /* Optional: Add some margin */
 }
 
 ::ng-deep .mat-simple-snackbar-action {
-  color: #ff4081 !important; /* Optional: Customize the "Close" button color */
+  color: #ff4081 !important;
+  /* Optional: Customize the "Close" button color */
 }
 
 ::ng-deep .mat-snack-bar-container {
-  max-width: 100% !important; /* Make sure it doesn't get cut off */
+  max-width: 100% !important;
+  /* Make sure it doesn't get cut off */
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  padding: 20px;
+  margin: 20px auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-right: -40px;
+  margin-top: 60px;
+
+  app-range-slider {
+    margin-right: 170px;
+  }
+
+  .apply-filters-button,
+  .cancel-filters-button {
+    margin-left: 10px;
+  }
+
+  .color-select {
+    width: 50%;
+  }
+}
+
+::ng-deep {
+
+  .mat-mdc-text-field-wrapper {
+    width: 100% !important;
+    margin-left: 10px !important;
+    height: 40px !important;
+  }
+
+  .mat-form-field-wrapper {
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #ac9cc4;
+    padding: 8px;
+    overflow: hidden;
+
+    .mat-mdc-text-field-wrapper {
+      width: 50%;
+    }
+
+    .mat-form-field-flex {
+      border: none;
+    }
+
+    .mat-input-element,
+    .mat-select-trigger {
+      color: #4d4d4d;
+    }
+
+    .mat-form-field-label {
+      color: #ac9cc4 !important;
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+
+    .mat-form-field-ripple {
+      display: none;
+    }
+  }
+
+  .mat-select-trigger {
+    border-radius: 4px;
+    border: 1px solid #ac9cc4;
+    padding: 8px;
+  }
+
+  .mat-select-value {
+    padding-left: 8px;
+  }
+
+  .mat-form-field-flex {
+    padding: 0;
+  }
+
+  .mat-mdc-slider.mat-primary {
+    --mdc-slider-handle-color: #ac9cc4 !important;
+    --mdc-slider-focus-handle-color: #ac9cc4 !important;
+    --mdc-slider-hover-handle-color: #ac9cc4 !important;
+    --mdc-slider-active-track-color: #ac9cc4 !important;
+    --mdc-slider-inactive-track-color: #ac9cc4 !important;
+    --mdc-slider-with-tick-marks-active-container-color: #ac9cc4 !important;
+    --mdc-slider-with-tick-marks-inactive-container-color: #ac9cc4 !important;
+    --mat-mdc-slider-ripple-color: #ac9cc4 !important;
+  }
 }
