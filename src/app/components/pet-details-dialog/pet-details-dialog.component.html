@@ -1,0 +1,78 @@
+<h1 mat-dialog-title>{{ data.pet.name }}'s details</h1>
+<div mat-dialog-content class="dialog-content">
+  <div class="col-md-4">
+    <app-photo-gallery [imageIds]="data.pet.photoIds" [petName]="data.pet.name"></app-photo-gallery>
+  </div>
+  <div class="col-md-8 details">
+    <div class="form-grid">
+      <div class="form-column">
+        <div class="form-group">
+          <label for="birthdate"><strong>Birthdate:</strong></label>
+          <div class="birthdate-container">
+            <ng-container *ngIf="editMode; else viewMode">
+              <input matInput [matDatepicker]="picker" [(ngModel)]="data.pet.birthdate" class="edit-field"
+                id="birthdate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </ng-container>
+            <ng-template #viewMode>
+              {{ data.pet.birthdate }}
+            </ng-template>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="color"><strong>Color:</strong></label>
+          <ng-container *ngIf="editMode; else viewColor">
+            <mat-select [(ngModel)]="data.pet.color" class="edit-field" id="color">
+              <mat-option *ngFor="let color of colors" [value]="color">{{ color }}</mat-option>
+            </mat-select>
+          </ng-container>
+          <ng-template #viewColor>
+            {{ data.pet.color }}
+          </ng-template>
+        </div>
+        <div class="form-group">
+          <label for="description"><strong>Description:</strong></label>
+
+          <ng-container *ngIf="editMode; else viewDescription">
+            <textarea [(ngModel)]="data.pet.description" class="edit-field textarea" id="description"></textarea>
+          </ng-container>
+          <ng-template #viewDescription>
+            {{ data.pet.description }}
+          </ng-template>
+        </div>
+        <div class="form-group" *ngIf="editMode">
+          <label for="pictures"><strong>Add Pictures:</strong></label>
+          <input id="pictures" type="file" (change)="onFileChange($event)" multiple class="edit-field">
+        </div>
+      </div>
+      <div class="form-column">
+        <div class="form-group">
+          <label for="age"><strong>Age:</strong></label>
+          <p id="age">{{ data.pet.age }}</p>
+        </div>
+        <div class="form-group">
+          <label for="gender"><strong>Gender:</strong></label>
+          <p id="gender">{{ data.pet.gender }}</p>
+        </div>
+        <div class="form-group">
+          <label for="breed"><strong>Breed:</strong></label>
+          <p id="breed">{{ data.pet.breed }}</p>
+        </div>
+        <div class="form-group owner-info" *ngIf="ownerInfo">
+          <p><strong>Owner:</strong></p>
+          <ul>
+            <li>First Name: {{ data.pet.owner.firstName }}</li>
+            <li>Last Name: {{ data.pet.owner.lastName }}</li>
+            <li>Email: {{ data.pet.owner.email }}</li>
+            <li>Address: {{ data.pet.owner.address }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button *ngIf="editMode" (click)="saveChanges()">Save</button>
+</div>

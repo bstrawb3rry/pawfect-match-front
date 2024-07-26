@@ -1,0 +1,72 @@
+
+.add-pet-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+
+  .mat-form-field-wrapper {
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #ac9cc4;
+    padding: 8px;
+    overflow: hidden;
+
+    .mat-form-field-flex {
+      border: none;
+    }
+
+    .mat-input-element,
+    .mat-select-trigger {
+      color: #4d4d4d; 
+    }
+
+    .mat-form-field-label {
+      color: #ac9cc4 !important;
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+
+    .mat-form-field-ripple {
+      display: none;
+    }
+  }
+
+  .mat-select-trigger {
+    border-radius: 4px;
+    border: 1px solid #ac9cc4;
+    padding: 8px;
+  }
+
+  .mat-select-value {
+    padding-left: 8px;
+  }
+
+  .mat-form-field-flex {
+    padding: 0;
+  }
+}
+
+#picture {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+textarea.mat-input-element {
+  resize: vertical;
+}

@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+  <mat-form-field *ngIf="receivers?.length > 0" appearance="outline">
+    <mat-label>Select Receiver</mat-label>
+    <mat-select [(value)]="selectedReceiver">
+      <mat-option *ngFor="let receiver of receivers" [value]="receiver.id">
+        {{ receiver.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Initial Message</mat-label>
+    <textarea matInput [(ngModel)]="initialMessage"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onSend()">Send</button>
+</div>

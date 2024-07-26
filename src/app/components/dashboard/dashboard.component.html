@@ -1,0 +1,48 @@
+<div class="filter-container">
+  <app-range-slider class="age-slider" [maxValue]="25" [minLabel]="'year/s'" [maxLabel]="'year/s'" [label]="'Age'" (ageRangeChanged)="updateAgeRange($event)"></app-range-slider>
+  <app-range-slider class="distance-slider" [minValue]="0" [maxValue]="4000" [minLabel]="'km'" [maxLabel]="'km'" [label]="'Distance'" (ageRangeChanged)="updateKmRange($event)"></app-range-slider>
+  <span>Color</span>
+  <mat-form-field class="color-select" appearance="outline">
+    <mat-select [(ngModel)]="selectedColors" multiple (selectionChange)="onColorSelectionChange($event)" placeholder="Select Color">
+      <mat-option *ngFor="let color of colors" [value]="color">{{ color }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="apply-filters-button">
+    <button class="like-button" (click)="applyFilters()">
+      <img src="assets/ok-filters.png" alt="Apply">
+    </button>
+  </div>
+  <div class="cancel-filters-button">
+    <button class="like-button" (click)="cancelFilters()">
+      <img src="assets/nok-filters.png" alt="Cancel">
+    </button>
+  </div>
+</div>
+
+<div class="gallery-container" *ngIf="possibleMatches.length > 0; else noMatchesTemplate" >
+  <div *ngFor="let pet of possibleMatches" class="gallery-item">
+    <app-photo-gallery [imageIds]="pet.photoIds" [petName]="pet.name" [distance]="pet.distance"></app-photo-gallery>
+    <div class="like-button-container">
+      <button class="like-button" (click)="likePet(pet.id)">
+        <img src="assets/paw.png" alt="Like">
+      </button>
+    </div>
+    <div class="details-button-container">
+      <button class="details-button" (click)="displayPetDetails(pet)">
+        <img src="assets/details.png" alt="Details">
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noPetsTemplate>
+  <div class="no-pets-message">
+    You don't have any pets. <br><a (click)="redirectToMyPets()">Add your furry friend now</a> and begin your search for their Pawfect Match!
+  </div>
+</ng-template>
+
+<ng-template #noMatchesTemplate>
+  <div class="no-matches-message" *ngIf="hasPets; else noPetsTemplate" >
+    No matching furry friends yet.. <br> Come back a bit later to find your Pawfect Match!
+  </div>
+</ng-template>
