@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Pet } from 'src/app/models/pet.model';
 import { PetService } from 'src/app/services/pet.service';
-import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -51,7 +50,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onSelectionChange(event: any) {
-    console.log('Selected value:', event.value);
     this.storageService.setItem('selectedPetId', event.value.id.toString());
     this.storageService.setItem('selectedPetType', event.value.type);
   }

@@ -14,7 +14,7 @@ const routes: Routes = [
     path: '',
     component: AuthLayoutComponent,
     children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full' },  // Default route to login
+      { path: '', redirectTo: 'login', pathMatch: 'full' }, 
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent }
     ]
@@ -29,7 +29,7 @@ const routes: Routes = [
       { path: 'my-dms', component: ChatComponent }
     ]
   },
-  { path: '**', redirectTo: 'login' }  // Wildcard route to redirect to login
+  { path: '**', redirectTo: 'login' } 
 ];
 
 @NgModule({

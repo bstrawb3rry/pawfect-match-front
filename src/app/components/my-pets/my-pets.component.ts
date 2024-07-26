@@ -77,6 +77,9 @@ export class MyPetsComponent implements OnInit {
   deletePet(pet: Pet): void {
     this.petService.deletePet(pet.id).subscribe(() => {
       this.myPets = this.myPets.filter(p => p.id !== pet.id);
+      this.storageService.removeItem('selectedPetId');
+      this.storageService.removeItem('selectedPetType');
+      this.changeDetectorRef.detectChanges();
     });
   }
 }

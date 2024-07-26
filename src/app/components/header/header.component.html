@@ -1,9 +1,8 @@
-<!-- header.component.html -->
+
 <div class="container">
   <mat-toolbar color="primary">
     <span class="title">PAWFECT MATCH</span>
     <span class="spacer"></span>
-    <!-- Dropdown with image -->
     <div class="dropdown-container" *ngIf="myPets.length > 0">
       <img src="assets/switcher.png" alt="Dropdown Icon" class="dropdown-icon">
       <mat-select [(value)]="selectedValue" class="dropdown-menu" (selectionChange)="onSelectionChange($event)">

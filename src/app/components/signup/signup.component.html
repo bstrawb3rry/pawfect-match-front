@@ -13,7 +13,6 @@
       <input id="username" formControlName="username" type="username" required />
       <div *ngIf="signupForm.get('username').invalid && signupForm.get('username').touched">
         <small>Username is required and must be at least 6 characters long.</small>
-        <!-- todo check for unique username -->
       </div>
     </div>
     <div>

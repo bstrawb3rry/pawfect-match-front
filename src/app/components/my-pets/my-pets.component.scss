@@ -1,16 +1,16 @@
 .gallery-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Center the items horizontally */
-    padding-top: 40px; /* Add more space between the header and the cards */
-    margin-left: 180px; /* Adjust this value to reduce the space between the sidebar and the cards */
+    justify-content: center; 
+    padding-top: 40px;
+    margin-left: 180px; 
     margin-top: 90px;
   }
   
   .gallery-item {
     position: relative;
-    width: 200px; /* Adjust the width as needed */
-    margin: 20px; /* Add space between the cards */
+    width: 200px; 
+    margin: 20px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     overflow: hidden;
@@ -26,12 +26,12 @@
   }
 
 .photo-gallery-container {
-    width: 100%; // Uses the full width of its parent .gallery-item
-    height: 100%; // Uses the full height of its parent .gallery-item
+    width: 100%; 
+    height: 100%; 
 }
 
 .photo-gallery-container img {
-    object-fit: cover; // Covers the container fully, cropping if necessary
+    object-fit: cover; 
 }
 
 
@@ -57,7 +57,6 @@
 
 .add-pet-button img {
   width: 60px;
-  /* Adjust the size as needed */
   height: 60px;
   border-radius: 50%;
 }
@@ -95,7 +94,7 @@
 }
 
 .edit-button img {
-  width: 30px; /* Adjust the size as needed */
+  width: 30px; 
   height: 30px;
   border-radius: 50%;
 }
@@ -121,7 +120,7 @@
 }
 
 .details-button img {
-  width: 30px; /* Adjust the size as needed */
+  width: 30px; 
   height: 30px;
   border-radius: 50%;
 }
@@ -147,7 +146,7 @@
 }
 
 .delete-button img {
-  width: 20px; /* Adjust the size as needed */
+  width: 20px; 
   height: 20px;
   border-radius: 50%;
 }

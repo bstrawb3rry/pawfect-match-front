@@ -5,7 +5,6 @@ import { PetService } from 'src/app/services/pet.service';
   selector: 'app-photo-gallery',
   templateUrl: './photo-gallery.component.html',
   styleUrls: ['./photo-gallery.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoGalleryComponent implements OnInit {
 
@@ -15,7 +14,7 @@ export class PhotoGalleryComponent implements OnInit {
   @Input() indicators = true;
   @Input() controls = true;
 
-  currentImageSrc: string = ""; //should put a default image - non found img or something 
+  currentImageSrc: string = "";
   selectedIndex = 0;
 
   constructor(
